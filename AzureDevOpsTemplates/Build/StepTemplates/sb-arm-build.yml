@@ -1,7 +1,7 @@
 parameters:
   ArmTemplateRoot: ''
   SolutionBaseName: ''
-  AzureSubscription: 'sb (f3b14109-a3de-4f54-9f58-46d891380a7e)'
+  AzureSubscription: 'sb(318061ea-2105-42da-82d9-b65e8e31017f)'
   TestArmTemplateScriptUrl: https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/PSScripts/Test-ArmTemplate.ps1
   TestArmTemplateScriptFilePath: $(System.DefaultWorkingDirectory)\Test-ArmTemplate.ps1
   TokenizeTestParameters: false
