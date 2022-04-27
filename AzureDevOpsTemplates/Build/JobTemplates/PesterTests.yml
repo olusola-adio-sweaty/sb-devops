@@ -1,0 +1,74 @@
+parameters:
+  TestsPath: 'tests'
+  ResultsPath: 'Publish'
+  CodeCoverageResultsFile: ''
+  TestResultsFile: ''
+  Tag: 'Quality'
+  SetPesterScriptFilePath: '$(System.DefaultWorkingDirectory)\Pester.ps1'
+  SetPesterScript: 'https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/Tests/Pester.ps1'
+  SetPesterHelpScriptFilePath: '$(System.DefaultWorkingDirectory)\Q001.Powershell.Help.Tests.ps1'
+  SetPesterHelpScript: 'https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/Tests/Q001.Powershell.Help.Tests.ps1'
+  SetPesterQualityScriptFilePath: '$(System.DefaultWorkingDirectory)\Q002.Powershell.Quality.Tests.ps1'
+  SetPesterQualityScript: 'https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/Tests/Q002.Powershell.Quality.Tests.ps1'
+
+ 
+
+jobs:
+- job: Pester
+  displayName: Pester Code Quality Tests
+  pool:
+    name: "MyPrivatePool"
+  workspace:
+      clean: all
+  steps:
+  - task: PowerShell@2
+    name: DownloadPesterScript
+    displayName: 'Download Pester PS script'
+    inputs:
+      targetType: 'inline'
+      script: Invoke-WebRequest -Uri ${{ parameters.SetPesterScript }} -OutFile ${{ parameters.SetPesterScriptFilePath }}
+  - task: PowerShell@2
+    name: DownloadPesterHelpScript
+    displayName: 'Download Pester Help Test'
+    inputs:
+      targetType: 'inline'
+      script: Invoke-WebRequest -Uri ${{ parameters.SetPesterHelpScript }} -OutFile ${{ parameters.SetPesterHelpScriptFilePath }}
+  - task: PowerShell@2
+    name: DownloadPesterQualityScript
+    displayName: 'Download Pester Quality Test'
+    inputs:
+      targetType: 'inline'
+      script: Invoke-WebRequest -Uri ${{ parameters.SetPesterQualityScript }} -OutFile ${{ parameters.SetPesterQualityScriptFilePath }}
+  - task: CopyFiles@2
+    displayName: 'Copy Pester.ps1'
+    inputs:
+      Contents: Pester.ps1
+      TargetFolder: '$(System.DefaultWorkingDirectory)\Tests\Pester'
+      SourceFolder: $(System.DefaultWorkingDirectory)
+  - task: CopyFiles@2
+    displayName: 'Copy Test Scripts'
+    inputs:
+      Contents: '*.Tests.ps1'
+      TargetFolder: '$(System.DefaultWorkingDirectory)\Tests'
+      SourceFolder: $(System.DefaultWorkingDirectory)  
+  - task: CopyFiles@2
+    displayName: 'Copy Local Scripts'
+    inputs:
+      Contents: '*.Tests.ps1'
+      TargetFolder: '$(System.DefaultWorkingDirectory)\Tests'
+      SourceFolder: Tests  
+  - task: PowerShell@2
+    displayName: 'Executing Pester Tests'
+    inputs:
+      filePath: '$(System.DefaultWorkingDirectory)\tests\Pester\Pester.ps1'
+      workingDirectory: '$(Build.SourcesDirectory)'
+      arguments: '-TestsPath $(Build.SourcesDirectory)\${{ parameters.TestsPath }} -ResultsPath $(System.DefaultWorkingDirectory)\${{ parameters.ResultsPath }} -Publish -TestResultsFile ${{ parameters.TestResultsFile }} -CodeCoverageResultsFile ${{ parameters.CodeCoverageResultsFile }} -Tag ${{ parameters.Tag }}'
+      errorActionPreference: 'silentlyContinue'
+      ignoreLASTEXITCODE: true
+  - task: PublishTestResults@2
+    displayName: 'Publish Pester Tests'
+    inputs:
+      testResultsFormat: 'NUnit'
+      testResultsFiles: '**/${{ parameters.TestResultsFile }}'
+      mergeTestResults: true
+      failTaskOnFailedTests: true

@@ -1,0 +1,35 @@
+variables:
+- name: SolutionBaseName
+  value: sb.DevOps
+
+resources:
+  repositories:
+  - repository: self
+  - repository: sb-devops
+    type: github
+    name: olusola-adio-sweaty/sb-devops
+    endpoint: 'GitHub (sb)'
+    ref: refs/tags/v1.11.2
+
+pool:
+  vmImage: 'windows-latest'
+trigger:
+  branches:
+    include:
+    - master
+    - dev
+
+pr:
+  branches:
+    include:
+    - master
+    - dev
+
+
+stages:
+- template: StageTemplates/RunTests.yml
+  parameters:
+    AzureSubscription: 'sb (f3b14109-a3de-4f54-9f58-46d891380a7e)'
+    Powershell5CodeCoveragePercentage: 38
+    PowershellCoreCodeCoveragePercentage: 30
+
