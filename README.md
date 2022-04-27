@@ -1,12 +1,12 @@
 # sb-devops
 
-[![Build Status](https://dev.azure.com/sb-cloud/sb/_apis/build/status/sb-devops?branchName=master)](https://dev.azure.com/sb-cloud/sb/_build/latest?definitionId=11&branchName=master) 
+[![Build Status](https://dev.azure.com/SweatyBettyOrg/SB-Devops/_apis/build/status/sb-devops?branchName=master)](https://dev.azure.com/SweatyBettyOrg/SB-Devops/_build/latest?definitionId=16&branchName=master)
 
 ARM templates, PowerShell modules and scripts, policies, documentation and other resources used in the sb Azure pipelines
 
 ## ARM Templates
 
-The ArmTemplates directory contains deployments that can be used to stand up a specific resource and can be used in the same way as nested templated.
+The ArmTemplates directory contains deployments that can be used to stand up a specific resource and can be used in the same way as nested template.
 A master template should call each template as a separate resource passing in parameters as necessary.
 
 A sample master template and links to individual deployment documentation can be [found here](ArmTemplates/README.md).
