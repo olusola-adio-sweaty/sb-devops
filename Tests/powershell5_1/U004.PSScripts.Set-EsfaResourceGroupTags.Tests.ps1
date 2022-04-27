@@ -7,7 +7,7 @@ Describe "Set-EsfaResourceGroupTags unit tests" -Tag "Unit" {
             @{
                 ResourceGroupName = "sb-foobar-rg"
                 Location          = "westeurope"
-                Tags              = @{"Parent Business" = "Karis Ministries"; "Service Offering" = "Karis Ministries Services"; "Environment" = "Dev/Test"; "Portfolio" = "Education and Skills Funding Agency"; "Service Line" = "National Careers Service (CEDD)"; "Service" = "National Careers Service"; "Product" = "Karis Ministries Services"; "Feature" = "Karis Ministries Services" } 
+                Tags              = @{"Parent Business" = "Sweaty Betty"; "Service Offering" = "Business Central"; "Environment" = "Dev/Test"; "Portfolio" = "Education and Skills Funding Agency"; "Service Line" = "National Careers Service (CEDD)"; "Service" = "National Careers Service"; "Product" = "Karis Ministries Services"; "Feature" = "Karis Ministries Services" } 
             }
         }
         Mock New-AzureRmResourceGroup
@@ -16,7 +16,7 @@ Describe "Set-EsfaResourceGroupTags unit tests" -Tag "Unit" {
     }
     It "Should do nothing if a resource group exists with matching tags" {
 
-        .\Set-EsfaResourceGroupTags -ResourceGroupName "sb-foobar-rg" -Environment "Dev/Test" -ParentBusiness "Karis Ministries" -ServiceOffering "Karis Ministries Services"
+        .\Set-EsfaResourceGroupTags -ResourceGroupName "sb-foobar-rg" -Environment "Dev/Test" -ParentBusiness "Sweaty Betty" -ServiceOffering "Business Central"
 
         Should -Invoke -CommandName Get-AzureRmResourceGroup -Exactly 1 -Scope It
         Should -Invoke -CommandName New-AzureRmResourceGroup -Exactly 0 -Scope It
@@ -26,7 +26,7 @@ Describe "Set-EsfaResourceGroupTags unit tests" -Tag "Unit" {
 
     It "Should update existing resource group if group exists with different tags" {
 
-        .\Set-EsfaResourceGroupTags -ResourceGroupName "sb-foobar-rg" -Environment "Dev/Test" -ParentBusiness "Karis Ministries" -ServiceOffering "Karis Ministries Services (PP)"
+        .\Set-EsfaResourceGroupTags -ResourceGroupName "sb-foobar-rg" -Environment "Dev/Test" -ParentBusiness "Sweaty Betty" -ServiceOffering "Business Central (PP)"
 
         Should -Invoke -CommandName Get-AzureRmResourceGroup -Exactly 1 -Scope It
         Should -Invoke -CommandName New-AzureRmResourceGroup -Exactly 0 -Scope It
@@ -38,7 +38,7 @@ Describe "Set-EsfaResourceGroupTags unit tests" -Tag "Unit" {
 
         Mock Get-AzureRmResourceGroup
 
-        .\Set-EsfaResourceGroupTags -ResourceGroupName "sb-barfoo-rg" -Environment "Dev/Test" -ParentBusiness "Karis Ministries" -ServiceOffering "Karis Ministries Services"
+        .\Set-EsfaResourceGroupTags -ResourceGroupName "sb-barfoo-rg" -Environment "Dev/Test" -ParentBusiness "Sweaty Betty" -ServiceOffering "Business Central"
 
         Should -Invoke -CommandName Get-AzureRmResourceGroup -Exactly 1 -Scope It
         Should -Invoke -CommandName New-AzureRmResourceGroup -Exactly 1 -Scope It
@@ -55,7 +55,7 @@ Describe "Set-EsfaResourceGroupTags unit tests" -Tag "Unit" {
             }
         }
     
-        .\Set-EsfaResourceGroupTags -ResourceGroupName "sb-barfoo-rg" -Environment "Dev/Test" -ParentBusiness "Karis Ministries" -ServiceOffering "Karis Ministries Services"
+        .\Set-EsfaResourceGroupTags -ResourceGroupName "sb-barfoo-rg" -Environment "Dev/Test" -ParentBusiness "Sweaty Betty" -ServiceOffering "Business Central"
 
         Should -Invoke -CommandName Get-AzureRmResourceGroup -Exactly 1 -Scope It
         Should -Invoke -CommandName New-AzureRmResourceGroup -Exactly 0 -Scope It

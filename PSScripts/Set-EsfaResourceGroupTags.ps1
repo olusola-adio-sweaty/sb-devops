@@ -34,10 +34,10 @@ param(
     [ValidateSet("Production", "Pre-Production", "Dev/Test")]
     [string]$Environment,
     [Parameter(Mandatory=$true)]
-    [ValidateSet("Karis Ministries")]
+    [ValidateSet("Sweaty Betty")]
     [string]$ParentBusiness,
     [Parameter(Mandatory=$true)]
-    [ValidateSet("Karis Ministries Services", "Karis Ministries Services (PP)")]
+    [ValidateSet("Business Central", "Business Central (PP)")]
     [string]$ServiceOffering
 )
 

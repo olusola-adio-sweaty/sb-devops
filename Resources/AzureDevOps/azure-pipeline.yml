@@ -8,7 +8,7 @@ resources:
   - repository: sb-devops
     type: github
     name: olusola-adio-sweaty/sb-devops
-    endpoint: 'GitHub (sb)'
+    endpoint: 'olusola-adio-sweaty'
     ref: refs/tags/v1.11.2
 
 pool:
