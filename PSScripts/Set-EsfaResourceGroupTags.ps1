@@ -37,7 +37,7 @@ param(
     [ValidateSet("Sweaty Betty")]
     [string]$ParentBusiness,
     [Parameter(Mandatory=$true)]
-    [ValidateSet("Business Central", "Business Central (PP)")]
+    [ValidateSet("Business Central", "Business Central (PP)", "Mulesoft")]
     [string]$ServiceOffering
 )
 
@@ -45,9 +45,6 @@ $Tags = @{
     'Environment' = $Environment
     'Parent Business' = $ParentBusiness
     'Service Offering' = $ServiceOffering
-    'Portfolio' = 'Education and Skills Funding Agency'
-    'Service Line' = 'National Careers Service (CEDD)'
-    'Service' = 'National Careers Service'
     'Product' = $ServiceOffering
     'Feature' = $ServiceOffering
 }

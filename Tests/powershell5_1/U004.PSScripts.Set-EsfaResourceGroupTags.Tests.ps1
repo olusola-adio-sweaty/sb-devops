@@ -7,7 +7,7 @@ Describe "Set-EsfaResourceGroupTags unit tests" -Tag "Unit" {
             @{
                 ResourceGroupName = "sb-foobar-rg"
                 Location          = "westeurope"
-                Tags              = @{"Parent Business" = "Sweaty Betty"; "Service Offering" = "Business Central"; "Environment" = "Dev/Test"; "Portfolio" = "Education and Skills Funding Agency"; "Service Line" = "National Careers Service (CEDD)"; "Service" = "National Careers Service"; "Product" = "Karis Ministries Services"; "Feature" = "Karis Ministries Services" } 
+                Tags              = @{"Parent Business" = "Sweaty Betty"; "Service Offering" = "Business Central"; "Environment" = "Dev/Test"; "Product" = "Business Central"; "Feature" = "Business Central" } 
             }
         }
         Mock New-AzureRmResourceGroup
