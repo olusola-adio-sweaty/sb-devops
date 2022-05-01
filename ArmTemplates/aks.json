@@ -141,7 +141,7 @@
                 "enableRBAC": true,
                 "aadProfile":  {
                     "managed": true,
-                    "tenantId": "[parameters('rbacTenantId')]",
+                    "enableAzureRBAC": true,
                     "adminGroupObjectIDs": "[parameters('aadProfileAdminGroupObjectIDs')]"
                 },
                 "servicePrincipalProfile": {
