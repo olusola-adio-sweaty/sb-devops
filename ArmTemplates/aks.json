@@ -23,9 +23,6 @@
                 "description": "The name of the resource group used for nodes"
             }
         },
-        "rbacTenantId": {
-            "type": "string"
-        },
         "serviceCidr": {
             "type": "string"
         },
@@ -47,7 +44,7 @@
                 "description": "Name of the existing VNET resource group"
             }
         },
-        "agentNodeCount": {
+        "agentNodeCount1": {
             "type": "int",
             "defaultValue": 2,
             "metadata": {
@@ -56,18 +53,41 @@
             "minValue": 1,
             "maxValue": 50
         },
-        "agentPoolName": {
-            "type": "string",
-            "defaultValue": "agentpool",
+        "agentNodeCount2": {
+            "type": "int",
+            "defaultValue": 4,
             "metadata": {
-                "description": "The name of the default agent pool"
+                "description": "The number of nodes for the cluster."
+            },
+            "minValue": 1,
+            "maxValue": 50
+        },
+        "agentPoolName1": {
+            "type": "string",
+            "defaultValue": "systempool",
+            "metadata": {
+                "description": "The name of the default system agent pool"
             }
         },
-        "agentVMSize": {
+        "agentPoolName2": {
             "type": "string",
-            "defaultValue": "Standard_DS2_v2",
+            "defaultValue": "apppool",
             "metadata": {
-                "description": "The sku of the machines that will be used for the default agentpool."
+                "description": "The name of the default app agent pool"
+            }
+        },
+        "agent1VMSize": {
+            "type": "string",
+            "defaultValue": "Standard_D4s_v3",
+            "metadata": {
+                "description": "The sku of the machines that will be used for the system agentpool."
+            }
+        },
+        "agent2VMSize": {
+            "type": "string",
+            "defaultValue": "Standard_DS12_v2",
+            "metadata": {
+                "description": "The sku of the machines that will be used for the app agentpool."
             }
         },
         "dockerBridgeCidr": {
@@ -126,14 +146,36 @@
                 "dnsPrefix": "[parameters('clusterName')]",
                 "agentPoolProfiles": [
                     {
-                        "name": "[parameters('agentPoolName')]",
-                        "count": "[parameters('agentNodeCount')]",
-                        "vmSize": "[parameters('agentVMSize')]",
+                        "name": "[parameters('agentPoolName1')]",
+                        "count": "[parameters('agentNodeCount1')]",
+                        "vmSize": "[parameters('agent1VMSize')]",
                         "osType": "Linux",
                         "vnetSubnetID": "[variables('vnetSubnetID')]",
                         "type": "VirtualMachineScaleSets",
                         "storageProfile": "ManagedDisks",
-                        "mode": "System"
+                        "mode": "System",
+                        "maxPods": 30,
+                        "availabilityZones": [
+                            "1",
+                            "2",
+                            "3"
+                        ]
+                    },
+                    {
+                        "name": "[parameters('agentPoolName2')]",
+                        "count": "[parameters('agentNodeCount2')]",
+                        "vmSize": "[parameters('agent2VMSize')]",
+                        "osType": "Linux",
+                        "vnetSubnetID": "[variables('vnetSubnetID')]",
+                        "type": "VirtualMachineScaleSets",
+                        "storageProfile": "ManagedDisks",
+                        "mode": "System",
+                        "maxPods": 40,
+                        "availabilityZones": [
+                            "1",
+                            "2",
+                            "3"
+                        ]
                     }
                 ],
                 "addonProfiles": "[if(equals(parameters('logAnalyticsWorkspaceName'), ''), variables('addOnObject').noAddons, variables('addOnObject').omsAddon)]",
