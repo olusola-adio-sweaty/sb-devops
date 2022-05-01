@@ -37,7 +37,7 @@ param(
     [ValidateSet("Sweaty Betty")]
     [string]$ParentBusiness,
     [Parameter(Mandatory=$true)]
-    [ValidateSet("Business Central", "Business Central (PP)", "Mulesoft")]
+    [ValidateSet("Shared AKS", "Business Central", "Business Central (PP)", "Mulesoft")]
     [string]$ServiceOffering
 )
 
