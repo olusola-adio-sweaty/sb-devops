@@ -7,7 +7,7 @@ parameters:
   Namespace: 'default'
 
 steps:
-- task: esfadevops.Tokenization.custom-build-task.Tokenization@0
+- task: Tokenization@0
   displayName: 'Tokenization: Transform file ${{ parameters.ManifestFileName }}'
   inputs:
     SourcePath: ${{ parameters.PathToManifest }}
