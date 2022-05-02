@@ -7,7 +7,7 @@ parameters:
   Namespace: 'default'
 
 steps:
-- task: Tokenization@0
+- task: Tokenization@2
   displayName: 'Tokenization: Transform file ${{ parameters.ManifestFileName }}'
   inputs:
     SourcePath: ${{ parameters.PathToManifest }}
