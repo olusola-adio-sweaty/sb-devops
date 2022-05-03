@@ -13,11 +13,11 @@
             "allowedValues": [
                 "East US",
                 "East US 2",
-                "UK South"
+                "West Europe"
             ],
-            "defaultValue": "UK South",
+            "defaultValue": "West Europe",
             "metadata": {
-                "description": "Location of the data factory. Currently, only East US, East US 2, and UK South are supported. "
+                "description": "Location of the data factory. Currently, only East US, East US 2, and West Europe are supported. "
             }
         },
         "GitHubAccountName": {

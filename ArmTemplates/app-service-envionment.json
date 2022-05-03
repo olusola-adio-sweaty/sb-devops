@@ -10,7 +10,7 @@
         },
         "location": {
             "type": "string",
-            "defaultValue": "UK South"
+            "defaultValue": "West Europe"
         },
         "networkSecurityGroupAssigned": {
             "type": "bool"

@@ -14,7 +14,7 @@ Name of the DNS domain that this ASE and it's child apps will be part of.  A wil
 
 location (optional) string
 
-Defaults to UK South.
+Defaults to West Europe.
 
 networkSecurityGroupAssigned (required) bool
 
