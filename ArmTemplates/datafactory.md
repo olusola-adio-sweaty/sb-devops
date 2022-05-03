@@ -10,7 +10,7 @@ Name of the data factory. Must be globally unique.
 
 DataFactoryLocation: (optional) string
 
-Location of the data factory. Currently, only East US, East US 2, and West Europe are supported.  Template defaults to West Europe.
+Location of the data factory. Currently, only East US, East US 2, and UK South are supported.  Template defaults to UK South.
 
 GitHubAccountName: (optional) string
 

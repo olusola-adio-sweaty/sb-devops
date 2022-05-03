@@ -9,7 +9,7 @@ Checks if a resource group exists, if it doesn't creates with specified tags.  I
 Name of the resource group to be created and \ or have tags applied
 
 .PARAMETER Location
-[Optional]Location of the resource group, defaults to West Europe
+[Optional]Location of the resource group, defaults to UK South
 
 .PARAMETER Environment
 Name of the environment, select from a valid ESFA environment name tag: Production, PreProduction or Dev/Test
@@ -29,7 +29,7 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$ResourceGroupName,
     [Parameter(Mandatory=$false)]
-    [string]$Location = "West Europe",
+    [string]$Location = "UK South",
     [Parameter(Mandatory=$true)]
     [ValidateSet("Production", "Pre-Production", "Dev/Test")]
     [string]$Environment,
