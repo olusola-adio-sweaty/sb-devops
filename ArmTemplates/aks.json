@@ -183,7 +183,6 @@
                 "enableRBAC": true,
                 "aadProfile": {
                     "managed": true,
-                    "enableAzureRBAC": true,
                     "adminGroupObjectIDs": "[parameters('aadProfileAdminGroupObjectIDs')]"
                 },
                 "servicePrincipalProfile": {
