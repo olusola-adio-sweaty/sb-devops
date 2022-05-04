@@ -58,5 +58,5 @@ jobs:
       inputs:
         targetType: filePath
         filePath: '$(System.DefaultWorkingDirectory)/Tests/Out-TestAndCodeCoverageResults.ps1'
-        arguments: '-TestResultFile "**/TEST-${{ parameters.ResultsFileSuffix }}.xml" -CodeCoverageFile "**/CODECOVERAGE-${{ parameters.ResultsFileSuffix }}.xml" -CoveragePercent ${{ parameters.CodeCoveragePercentage }}'
+        arguments: '-CoveragePercent ${{ parameters.CodeCoveragePercentage }}'
         pwsh: true
