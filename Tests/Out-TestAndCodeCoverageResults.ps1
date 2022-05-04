@@ -62,7 +62,7 @@ if ($Failures) {
     }
     Write-Error "Pester reported $NumFailures error(s)"
 } else {
-    Write-Output "no errors"
+    Write-Output "Pester reported no errors"
 }
 
 $TotalLines = 0
