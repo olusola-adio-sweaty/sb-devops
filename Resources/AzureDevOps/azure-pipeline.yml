@@ -12,7 +12,7 @@ resources:
     ref: refs/tags/v1.11.2
 
 pool:
-  name:: 'DevOpsPool'
+  name: 'DevOpsPool'
 trigger:
   branches:
     include:
