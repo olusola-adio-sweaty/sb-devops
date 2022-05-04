@@ -49,7 +49,7 @@ if (-not $CodeCoverageFile) {
 Write-Output "CodeCoverageFile = $CodeCoverageFile"
 [xml] $CodeCoverage = Get-Content -Path $CodeCoverageFile
 
-
+Write-Output "about to parse test file"
 $Failures = select-xml "//test-results/test-suite[@success='False']" $TestResult
 if ($Failures) {
     $NumFailures = 0
@@ -61,10 +61,13 @@ if ($Failures) {
         }
     }
     Write-Error "Pester reported $NumFailures error(s)"
+} else {
+    Write-Output "no errors"
 }
 
 $TotalLines = 0
 $CoveredLines = 0
+Write-Output "about to parse coverage file"
 select-xml "//report/counter" $CodeCoverage | ForEach-Object {
     $TotalLines += [int] $_.Node.missed + [int] $_.Node.covered
     $CoveredLines += [int] $_.Node.covered
