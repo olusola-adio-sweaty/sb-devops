@@ -13,14 +13,6 @@ jobs:
   workspace:
     clean: all
   steps:
-  - task: AzurePowerShell@4
-    displayName: 'Install Az.Resources'
-    inputs:
-      azureSubscription: '${{ parameters.AzureSubscription }}'
-      ScriptType: InlineScript
-      Inline: 'Install-Module -Name Az.Resources -AllowClobber -Force'
-      azurePowerShellVersion: LatestVersion
-
   - task: DeleteFiles@1
     displayName: 'Remove old test and code coverage files'
     inputs:
