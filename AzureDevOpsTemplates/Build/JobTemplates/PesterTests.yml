@@ -17,7 +17,7 @@ jobs:
 - job: Pester
   displayName: Pester Code Quality Tests
   pool:
-    vmImage: 'windows-latest'
+    name: 'DevOpsPool'
   workspace:
       clean: all
   steps:
