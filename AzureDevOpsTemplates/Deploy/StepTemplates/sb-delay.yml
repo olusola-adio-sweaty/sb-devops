@@ -1,0 +1,9 @@
+parameters:
+  DelayTime: '120'
+
+steps:
+- task: PowerShell@2
+  displayName: "Delay for ${{ parameters.DelayTime }} seconds"
+  inputs:
+    script: 'Start-Sleep -s ${{ parameters.DelayTime }}'
+    targetType: 'inline' # Optional. Options: filePath, inline
