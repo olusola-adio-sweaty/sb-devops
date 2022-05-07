@@ -30,7 +30,7 @@ steps:
     azureSubscription: ${{ parameters.AzureSubscription }}
     scriptType: filePath
     ScriptPath: ${{ parameters.SetTagsScriptFilePath }}
-    ScriptArguments: '-ResourceGroupName ${{ parameters.ResourceGroup }} -Environment "${{ parameters.EnvironmentTag }}" -ParentBusiness "${{ parameters.ParentBusinessTag }}" -ServiceOffering "${{ parameters.ServiceOfferingTag }}"'
+    ScriptArguments: '-ResourceGroupName ${{ parameters.ResourceGroup }}  -Location "${{  parameters.Location  }}" -Environment "${{ parameters.EnvironmentTag }}" -ParentBusiness "${{ parameters.ParentBusinessTag }}" -ServiceOffering "${{ parameters.ServiceOfferingTag }}" -Verbose'
     azurePowerShellVersion: LatestVersion
 - task: AzureResourceGroupDeployment@2
   displayName: 'Azure Deployment: Deploy resources to ${{ parameters.ResourceGroup }}'
