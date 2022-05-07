@@ -11,6 +11,7 @@ parameters:
   ServiceOfferingTag: ''
   SetTagsScriptUrl: 'https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/PSScripts/Set-EsfaResourceGroupTags.ps1'
   SetTagsScriptFilePath: '$(System.DefaultWorkingDirectory)\Set-EsfaResourceGroupTags.ps1'
+  ArmOutputVariableName: 'ARMOutputs'
 
 steps:
 - task: Tokenization@2
@@ -40,7 +41,7 @@ steps:
     location:  ${{ parameters.Location }}
     csmFile: '${{ parameters.ArmTemplateRoot }}/template.json'
     csmParametersFile: '${{ parameters.ArmTemplateRoot }}/parameters.json'
-    deploymentOutputs: ARMOutputs
+    deploymentOutputs: '$(ArmOutputVariableName)'
 - task: DeleteFiles@1
   displayName: 'Delete tokenised parameters.json file'
   inputs:
