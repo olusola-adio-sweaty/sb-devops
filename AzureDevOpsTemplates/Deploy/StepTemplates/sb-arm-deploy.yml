@@ -2,6 +2,7 @@
 # In addition to the passing in the parameters listed below you will need to ensure that the variables that are tokenised are scoped to the stage or job calling this step template.
 
 parameters:
+  Location: ''
   ArmTemplateRoot: ''
   AzureSubscription: ''
   EnvironmentTag: ''
@@ -36,7 +37,7 @@ steps:
   inputs:
     azureSubscription: ${{ parameters.AzureSubscription }}
     resourceGroupName: '${{ parameters.ResourceGroup }}'
-    location: 'West Europe'
+    location:  ${{ parameters.Location }}
     csmFile: '${{ parameters.ArmTemplateRoot }}/template.json'
     csmParametersFile: '${{ parameters.ArmTemplateRoot }}/parameters.json'
     deploymentOutputs: ARMOutputs
