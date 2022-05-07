@@ -2,7 +2,7 @@
 # In addition to the passing in the parameters listed below you will need to ensure that the variables that are tokenised are scoped to the stage or job calling this step template.
 
 parameters:
-  Location: ''
+  Location: 'West Europe'
   ArmTemplateRoot: ''
   AzureSubscription: ''
   EnvironmentTag: ''
