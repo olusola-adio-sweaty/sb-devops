@@ -185,7 +185,11 @@
             "enabled": true
           }
         ]
-      }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments','functionAppTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments','eventHubTemplate')]"
+      ]
     }
   ],
   "outputs": {
