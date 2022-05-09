@@ -73,7 +73,8 @@
   },
   "variables": {
     "subscriptionId": "[subscription().subscriptionId]",
-    "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'), '/authorizationRules/RootManageSharedAccessKey')]",
+    "ResourceGroupName": "[resourceGroup().Name]",
+    "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', variables('ResourceGroupName'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'), '/authorizationRules/RootManageSharedAccessKey')]",
     "monDevOpsTemplatesUrl": "https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/"
   },
   "resources": [
@@ -191,11 +192,5 @@
         "[resourceId('Microsoft.Resources/deployments','eventHubTemplate')]"
       ]
     }
-  ],
-  "outputs": {
-    "eventHubNamespace": {
-      "type": "string",
-      "value": "[parameters('eventHubNamespace')]"
-    }
-  }
+  ]
 }
