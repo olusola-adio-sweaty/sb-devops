@@ -20,10 +20,9 @@ Describe "Datadog Tests" -Tag "Acceptance" {
       $functionAppNameInsights = "$($prefix)-ai"
       $DiagnosticSettingName = "$($prefix)-eh-diag-setting"
 
-      $code = (New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/Datadog/function-code.js")
+      $code = "code"
 
-      $environment = Get-AzEnvironment -Name "AzureCloud"
-      $endpointSuffix = $environment.StorageEndpointSuffix
+      $endpointSuffix = "endpointSuffix"
 
       $TemplateParameters = @{
           ResourceGroupName = $ResourceGroupName
