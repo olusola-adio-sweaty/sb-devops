@@ -22,7 +22,7 @@ Describe "Datadog Tests" -Tag "Acceptance" {
 
       $code = "code"
 
-      $endpointSuffix = "endpointSuffix"
+      $endpointSuffix = "core.windows.net"
 
       $TemplateParameters = @{
           ResourceGroupName = $ResourceGroupName
