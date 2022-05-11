@@ -18,14 +18,12 @@ Describe "Datadog Tests" -Tag "Acceptance" {
       $EventhubName = "$($prefix)-eh"
       $FunctionName = "$($prefix)-fn"
       $functionAppNameInsights = "$($prefix)-ai"
-      $DiagnosticSettingName = "$($prefix)-eh-diag-setting"
 
       $code = "code"
 
       $endpointSuffix = "core.windows.net"
 
       $TemplateParameters = @{
-          ResourceGroupName = $ResourceGroupName
           functionCode = $code
           apiKey = $ApiKey
           location = $ResourceGroupLocation
