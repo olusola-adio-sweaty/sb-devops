@@ -27,6 +27,13 @@
             "metadata": {
                 "description": "Name of the EventHub to which the Activity logs will be sent."
             }
+        },
+        "copies": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "number of functins and event hubs"
+            }
         }
     },
     "variables": {
@@ -40,7 +47,7 @@
             "name": "[concat(parameters('settingName'),copyIndex(1))]",
             "copy": {
                 "name": "nsg-loop",
-                "count": 2
+                "count": "[parameters('copies')]"
             },
             "properties": {
                 "eventHubAuthorizationRuleId": "[variables('eventHubAuthorizationRuleId')]",

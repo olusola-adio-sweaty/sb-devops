@@ -61,6 +61,13 @@
       "metadata": {
         "description": "Endpoint suffix for storage account"
       }
+    },
+    "copies": {
+      "type": "int",
+      "defaultValue": 1,
+      "metadata": {
+        "description": "number of functins and event hubs"
+      }
     }
   },
   "variables": {
@@ -160,7 +167,7 @@
       "name": "[concat(parameters('functionAppName'), '/', parameters('functionName'), copyIndex(1))]",
       "copy": {
         "name": "nsg-loop",
-        "count": 2
+        "count": "[parameters('copies')]"
       },
       "type": "Microsoft.Web/sites/functions",
       "apiVersion": "2020-06-01",
