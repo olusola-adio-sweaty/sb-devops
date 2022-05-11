@@ -138,8 +138,12 @@
     },
     {
       "type": "microsoft.insights/components",
+      "copy": {
+        "name": "nsg-loop",
+        "count": 2
+      },
       "apiVersion": "2020-02-02",
-      "name": "[variables('appInsights')]",
+      "name": "[concat(variables('appInsights'),copyIndex(1))]",
       "location": "[resourceGroup().location]",
       "kind": "web",
       "properties": {
