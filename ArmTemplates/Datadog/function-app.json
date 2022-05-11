@@ -157,7 +157,11 @@
       }
     },
     {
-      "name": "[concat(parameters('functionAppName'), '/', parameters('functionName'))]",
+      "name": "[concat(parameters('functionAppName'), '/', parameters('functionName'), copyIndex(1))]",
+      "copy": {
+        "name": "nsg-loop",
+        "count": 2
+      },
       "type": "Microsoft.Web/sites/functions",
       "apiVersion": "2020-06-01",
       "properties": {
@@ -167,7 +171,7 @@
               "name": "eventHubMessages",
               "type": "eventHubTrigger",
               "direction": "in",
-              "eventHubName": "[parameters('eventhubName')]",
+              "eventHubName": "[concat(parameters('eventhubName'), copyIndex(1))]",
               "connection": "[variables('connectionStringKey')]",
               "cardinality": "many",
               "dataType": "",
