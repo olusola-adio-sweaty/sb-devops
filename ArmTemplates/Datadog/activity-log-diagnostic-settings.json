@@ -69,14 +69,14 @@
             ]
         },
         {
-            "type": "microsoft.providers/diagnosticSettings",
+            "type": "microsoft.insights/diagnosticSettings",
             "copy": {
                 "name": "nsg-loop",
                 "count": "[parameters('copies')]"
             },
             "location": "West Europe",
             "apiVersion": "2017-05-01-preview",
-            "name": "[concat('Microsoft.insights/', parameters('settingName'),'-',copyIndex(1))]",
+            "name": "[concat(concat(variables('appInsights'),'-',copyIndex(1)), '/', parameters('settingName'),'-',copyIndex(1))]",
             "properties": {
                 "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/authorizationRules/','Rule-', copyIndex(1))]",
                 "eventHubName": "[concat(parameters('eventHubName'),'-',copyIndex(1))]",
