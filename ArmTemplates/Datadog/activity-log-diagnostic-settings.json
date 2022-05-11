@@ -44,14 +44,14 @@
         {
             "type": "Microsoft.Insights/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
-            "name": "[concat(parameters('settingName'),copyIndex(1))]",
+            "name": "[concat(parameters('settingName'),'-',copyIndex(1))]",
             "copy": {
                 "name": "nsg-loop",
-                "count": 2
+                "count": "[parameters('copies')]"
             },
             "properties": {
-                "eventHubAuthorizationRuleId": "[variables('eventHubAuthorizationRuleId')]",
-                "eventHubName": "[concat(parameters('eventHubName'),copyIndex(1))]",
+                "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'), '/eventHubs/', parameters('eventHubName'),'-',copyIndex(1),'/authorizationRules/','Rule-', copyIndex(1))]",
+                "eventHubName": "[concat(parameters('eventHubName'),'-',copyIndex(1))]",
                 "logs": [
                     {
                         "category": "Administrative",

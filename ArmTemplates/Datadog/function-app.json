@@ -164,7 +164,7 @@
       }
     },
     {
-      "name": "[concat(parameters('functionAppName'), '/', parameters('functionName'), copyIndex(1))]",
+      "name": "[concat(parameters('functionAppName'), '/', parameters('functionName'),'-', copyIndex(1))]",
       "copy": {
         "name": "nsg-loop",
         "count": "[parameters('copies')]"
@@ -178,7 +178,7 @@
               "name": "eventHubMessages",
               "type": "eventHubTrigger",
               "direction": "in",
-              "eventHubName": "[concat(parameters('eventhubName'), copyIndex(1))]",
+              "eventHubName": "[concat(parameters('eventhubName'),'-', copyIndex(1))]",
               "connection": "[variables('connectionStringKey')]",
               "cardinality": "many",
               "dataType": "",
