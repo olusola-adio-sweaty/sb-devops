@@ -47,7 +47,7 @@
             "name": "[concat(parameters('settingName'),copyIndex(1))]",
             "copy": {
                 "name": "nsg-loop",
-                "count": "[parameters('copies')]"
+                "count": 2
             },
             "properties": {
                 "eventHubAuthorizationRuleId": "[variables('eventHubAuthorizationRuleId')]",
