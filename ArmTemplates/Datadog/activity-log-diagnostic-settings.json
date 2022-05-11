@@ -44,7 +44,7 @@
         {
             "type": "Microsoft.Insights/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
-            "name": "[concat(parameters('settingName'),'-',copyIndex(1))]",
+            "name":  "[concat('sb-dev-api-datadog-ingest-ai','-',copyIndex(1),'/microsoft.insights/', parameters('settingName'),'-',copyIndex(1))]",
             "copy": {
                 "name": "nsg-loop",
                 "count": "[parameters('copies')]"
@@ -52,6 +52,7 @@
             "properties": {
                 "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/authorizationRules/','Rule-', copyIndex(1))]",
                 "eventHubName": "[concat(parameters('eventHubName'),'-',copyIndex(1))]",
+                "scope": "",
                 "logs": [
                     {
                         "category": "Administrative",
