@@ -33,7 +33,7 @@
       ]
     },
     {
-      "name": "[concat(parameters('eventHubName'), copyIndex(1))]",
+      "name": "[concat(parameters('eventHubNamespace'), '/', parameters('eventHubName'), copyIndex(1))]",
       "copy": {
         "name": "nsg-loop",
         "count": 2
