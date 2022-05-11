@@ -50,7 +50,7 @@
                 "count": "[parameters('copies')]"
             },
             "properties": {
-                "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'), '/eventHubs/', parameters('eventHubName'),'-',copyIndex(1),'/authorizationRules/','Rule-', copyIndex(1))]",
+                "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/authorizationRules/','Rule-', copyIndex(1))]",
                 "eventHubName": "[concat(parameters('eventHubName'),'-',copyIndex(1))]",
                 "logs": [
                     {
