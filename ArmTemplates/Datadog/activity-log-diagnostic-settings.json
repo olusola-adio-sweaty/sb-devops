@@ -38,56 +38,79 @@
     },
     "variables": {
         "subscriptionId": "[subscription().subscriptionId]",
+        "logAnalyticWorspace": "/subscriptions/0caa9715-5f9b-4367-a8f3-e3636c7821c6/resourceGroups/defaultresourcegroup-suk/providers/microsoft.operationalinsights/workspaces/defaultworkspace-0caa9715-5f9b-4367-a8f3-e3636c7821c6-suk",
+        "appInsights": "sb-dev-api-datadog-ingest-ai",
         "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'), '/authorizationRules/RootManageSharedAccessKey')]"
     },
     "resources": [
+
         {
-            "type": "Microsoft.Insights/diagnosticSettings",
-            "apiVersion": "2017-05-01-preview",
-            "name":  "[concat('sb-dev-api-datadog-ingest-ai','-',copyIndex(1),'/', parameters('settingName'),'-',copyIndex(1))]",
+            "type": "microsoft.insights/components",
             "copy": {
                 "name": "nsg-loop",
                 "count": "[parameters('copies')]"
             },
+            "apiVersion": "2020-02-02",
+            "name": "[concat(variables('appInsights'),'-',copyIndex(1))]",
+            "location": "[resourceGroup().location]",
+            "kind": "web",
             "properties": {
-                "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/authorizationRules/','Rule-', copyIndex(1))]",
-                "eventHubName": "[concat(parameters('eventHubName'),'-',copyIndex(1))]",
-                "scope": "",
-                "logs": [
-                    {
-                        "category": "Administrative",
-                        "enabled": true
-                    },
-                    {
-                        "category": "Security",
-                        "enabled": true
-                    },
-                    {
-                        "category": "ServiceHealth",
-                        "enabled": true
-                    },
-                    {
-                        "category": "Alert",
-                        "enabled": true
-                    },
-                    {
-                        "category": "Recommendation",
-                        "enabled": true
-                    },
-                    {
-                        "category": "Policy",
-                        "enabled": true
-                    },
-                    {
-                        "category": "Autoscale",
-                        "enabled": true
-                    },
-                    {
-                        "category": "ResourceHealth",
-                        "enabled": true
+                "Application_Type": "web",
+                "Flow_Type": "Redfield",
+                "Request_Source": "IbizaWebAppExtensionCreate",
+                "RetentionInDays": 90,
+                "WorkspaceResourceId": "[variables('logAnalyticWorspace')]",
+                "IngestionMode": "LogAnalytics",
+                "publicNetworkAccessForIngestion": "Enabled",
+                "publicNetworkAccessForQuery": "Enabled"
+            },
+            "resources": [
+                {
+                    "type": "diagnosticSettings",
+                    "apiVersion": "2017-05-01-preview",
+                    "name": "[concat( parameters('settingName'),'-',copyIndex(1))]",
+                    "properties": {
+                        "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/authorizationRules/','Rule-', copyIndex(1))]",
+                        "eventHubName": "[concat(parameters('eventHubName'),'-',copyIndex(1))]",
+                        "scope": "",
+                        "logs": [
+                            {
+                                "category": "Administrative",
+                                "enabled": true
+                            },
+                            {
+                                "category": "Security",
+                                "enabled": true
+                            },
+                            {
+                                "category": "ServiceHealth",
+                                "enabled": true
+                            },
+                            {
+                                "category": "Alert",
+                                "enabled": true
+                            },
+                            {
+                                "category": "Recommendation",
+                                "enabled": true
+                            },
+                            {
+                                "category": "Policy",
+                                "enabled": true
+                            },
+                            {
+                                "category": "Autoscale",
+                                "enabled": true
+                            },
+                            {
+                                "category": "ResourceHealth",
+                                "enabled": true
+                            }
+                        ]
                     }
-                ]
-            }
+                }
+            ]
         }
+
     ]
 }
