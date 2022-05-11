@@ -44,7 +44,7 @@
         {
             "type": "Microsoft.Insights/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
-            "name":  "[concat('microsoft.insights/components/','sb-dev-api-datadog-ingest-ai','-',copyIndex(1),'/', parameters('settingName'),'-',copyIndex(1))]",
+            "name":  "[concat('sb-dev-api-datadog-ingest-ai','-',copyIndex(1),'/', parameters('settingName'),'-',copyIndex(1))]",
             "copy": {
                 "name": "nsg-loop",
                 "count": "[parameters('copies')]"
