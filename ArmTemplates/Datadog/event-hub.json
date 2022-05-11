@@ -26,11 +26,7 @@
         "name": "Standard",
         "tier": "Standard",
         "capacity": 1
-      },
-      "tags": {},
-      "properties": {},
-      "resources": [
-      ]
+      }
     },
     {
       "name": "[concat(parameters('eventHubNamespace'), '/', parameters('eventHubName'), copyIndex(1))]",

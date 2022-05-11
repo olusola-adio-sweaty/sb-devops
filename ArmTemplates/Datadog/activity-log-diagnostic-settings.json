@@ -37,10 +37,14 @@
         {
             "type": "Microsoft.Insights/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
-            "name": "[parameters('settingName')]",
+            "name": "[concat(parameters('settingName'),copyIndex(1))]",
+            "copy": {
+                "name": "nsg-loop",
+                "count": 2
+            },
             "properties": {
                 "eventHubAuthorizationRuleId": "[variables('eventHubAuthorizationRuleId')]",
-                "eventHubName": "[parameters('eventHubName')]",
+                "eventHubName": "[concat(parameters('eventHubName'),copyIndex(1))]",
                 "logs": [
                     {
                         "category": "Administrative",
