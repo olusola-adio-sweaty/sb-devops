@@ -11,6 +11,7 @@ Describe "Datadog Tests" -Tag "Acceptance" {
 
     BeforeAll {
 
+      $prefix = "sb-test-template"
       $DatadogSite = "datadoghq.eu"
 
       $EventhubNamespace = "$($prefix)-eh-ns"
