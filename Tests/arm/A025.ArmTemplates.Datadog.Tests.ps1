@@ -27,7 +27,6 @@ Describe "Datadog Tests" -Tag "Acceptance" {
       $TemplateParameters = @{
           functionCode = $code
           apiKey = $ApiKey
-          location = $ResourceGroupLocation
           eventHubName = $EventhubName
           functionName = $FunctionName
           datadogSite = $DatadogSite

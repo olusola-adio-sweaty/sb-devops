@@ -49,13 +49,6 @@
         "description": "Datadog API key"
       }
     },
-    "location": {
-      "type": "string",
-      "defaultValue": "[resourceGroup().location]",
-      "metadata": {
-        "description": "Specify a location for the resources."
-      }
-    },
     "datadogSite": {
       "type": "string",
       "defaultValue": "datadoghq.com",
@@ -94,9 +87,6 @@
           },
           "eventHubName": {
             "value": "[parameters('eventHubName')]"
-          },
-          "location": {
-            "value": "[parameters('location')]"
           }
         }
       }
@@ -129,9 +119,6 @@
           },
           "apiKey": {
             "value": "[parameters('apiKey')]"
-          },
-          "location": {
-            "value": "[parameters('location')]"
           },
           "datadogSite": {
             "value": "[parameters('datadogSite')]"
