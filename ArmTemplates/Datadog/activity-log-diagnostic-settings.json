@@ -52,7 +52,7 @@
             },
             "apiVersion": "2020-02-02",
             "name": "[concat(variables('appInsights'),'-',copyIndex(1))]",
-            "location": "[resourceGroup().location]",
+            "location": "West Europe",
             "kind": "web",
             "properties": {
                 "Application_Type": "web",
@@ -74,6 +74,7 @@
                 "name": "nsg-loop",
                 "count": "[parameters('copies')]"
             },
+            "location": "West Europe",
             "apiVersion": "2017-05-01-preview",
             "name": "[concat('Microsoft.insights/', parameters('settingName'),'-',copyIndex(1))]",
             "properties": {
