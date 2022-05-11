@@ -1,45 +1,49 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-      "eventHubNamespace": {
-        "type": "string",
-        "metadata": {
-          "description": "Name of EventHub namespace"
-        }
-      },
-      "eventHubName": {
-        "type": "string",
-        "defaultValue": "datadog-eventhub",
-        "metadata": {
-          "description": "Name of Event Hub"
-        }
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "eventHubNamespace": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of EventHub namespace"
       }
     },
-    "resources": [
-      {
-        "apiVersion": "2018-01-01-preview",
-        "name": "[parameters('eventHubNamespace')]",
-        "type": "Microsoft.EventHub/namespaces",
-        "location": "[resourceGroup().location]",
-        "sku": {
-          "name": "Standard",
-          "tier": "Standard",
-          "capacity": 1
-        },
-        "tags": {},
-        "properties": {},
-        "resources": [
-          {
-            "apiVersion": "2017-04-01",
-            "name": "[parameters('eventHubName')]",
-            "type": "eventhubs",
-            "dependsOn": [
-              "[resourceId('Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'))]"
-            ],
-            "properties": {}
-          }
-        ]
+    "eventHubName": {
+      "type": "string",
+      "defaultValue": "datadog-eventhub",
+      "metadata": {
+        "description": "Name of Event Hub"
       }
-    ]
-  }
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2018-01-01-preview",
+      "name": "[parameters('eventHubNamespace')]",
+      "type": "Microsoft.EventHub/namespaces",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "Standard",
+        "tier": "Standard",
+        "capacity": 1
+      },
+      "tags": {},
+      "properties": {},
+      "resources": [
+      ]
+    },
+    {
+      "name": "[concat(parameters('eventHubName'), copyIndex(1))]",
+      "copy": {
+        "name": "nsg-loop",
+        "count": 2
+      },
+      "apiVersion": "2017-04-01",
+      "type": "Microsoft.EventHub/namespaces/eventhubs",
+      "dependsOn": [
+        "[resourceId('Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'))]"
+      ],
+      "properties": {}
+    }
+  ]
+}
