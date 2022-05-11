@@ -19,7 +19,8 @@ Describe "Datadog Tests" -Tag "Acceptance" {
       $FunctionName = "$($prefix)-fn"
       $functionAppNameInsights = "$($prefix)-ai"
 
-      $code = "code"
+      $code = (New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/Datadog/function-code.js")
+
 
       $endpointSuffix = "core.windows.net"
 
