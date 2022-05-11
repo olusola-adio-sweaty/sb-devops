@@ -146,7 +146,6 @@
         }
       },
       "dependsOn": [
-
         "[resourceId('Microsoft.Resources/deployments','eventHubTemplate')]"
       ]
     },
