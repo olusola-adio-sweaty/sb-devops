@@ -68,7 +68,7 @@
     "eventHubTemplateLink": "https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/Datadog/event-hub.json",
     "functionAppTemplateLink": "https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/Datadog/function-app.json",
     "logAnalyticWorspace": "/subscriptions/0caa9715-5f9b-4367-a8f3-e3636c7821c6/resourceGroups/defaultresourcegroup-suk/providers/microsoft.operationalinsights/workspaces/defaultworkspace-0caa9715-5f9b-4367-a8f3-e3636c7821c6-suk",
-    "appInsights": "sb-dev-api-datadog-ai"
+    "appInsights": "sb-dev-api-datadog-ingest-ai"
   },
   "resources": [
     {
@@ -135,24 +135,24 @@
 
         "[resourceId('Microsoft.Resources/deployments','eventHubTemplate')]"
       ]
+    },
+    {
+      "type": "microsoft.insights/components",
+      "apiVersion": "2020-02-02",
+      "name": "[variables('appInsights')]",
+      "location": "uksouth",
+      "kind": "web",
+      "properties": {
+        "Application_Type": "web",
+        "Flow_Type": "Redfield",
+        "Request_Source": "IbizaWebAppExtensionCreate",
+        "RetentionInDays": 90,
+        "WorkspaceResourceId": "[variables('logAnalyticWorspace')]",
+        "IngestionMode": "LogAnalytics",
+        "publicNetworkAccessForIngestion": "Enabled",
+        "publicNetworkAccessForQuery": "Enabled"
+      }
     }
-    // {
-    //   "type": "microsoft.insights/components",
-    //   "apiVersion": "2020-02-02",
-    //   "name": "[variables('appInsights')]",
-    //   "location": "uksouth",
-    //   "kind": "web",
-    //   "properties": {
-    //     "Application_Type": "web",
-    //     "Flow_Type": "Redfield",
-    //     "Request_Source": "IbizaWebAppExtensionCreate",
-    //     "RetentionInDays": 90,
-    //     "WorkspaceResourceId": "[variables('logAnalyticWorspace')]",
-    //     "IngestionMode": "LogAnalytics",
-    //     "publicNetworkAccessForIngestion": "Enabled",
-    //     "publicNetworkAccessForQuery": "Enabled"
-    //   }
-    // }
   ],
   "outputs": {
     "eventHubNamespace": {
