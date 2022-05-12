@@ -65,7 +65,6 @@
     },
     "copies": {
       "type": "int",
-      "defaultValue": 1,
       "metadata": {
         "description": "number of functins and event hubs"
       }
