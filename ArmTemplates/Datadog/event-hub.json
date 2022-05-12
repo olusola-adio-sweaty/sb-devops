@@ -54,15 +54,15 @@
       "properties": {}
     },
     {
-      "name": "[concat(parameters('eventHubNamespace'), '/Rule-', copyIndex(1))]",
-      "type": "Microsoft.EventHub/namespaces/authorizationRules",
+      "name": "[concat(parameters('eventHubNamespace'),'/', parameters('eventHubName'),'-', copyIndex(1), '/Rule-', copyIndex(1))]",
+      "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
       "apiVersion": "2017-04-01",
       "copy": {
         "name": "nsg-loop",
         "count": "[parameters('copies')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'))]"
+        "[resourceId('Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/', parameters('eventHubName'),'-', copyIndex(1))]"
       ],
       "properties": {
         "rights": [ "Send", "Listen" ]
