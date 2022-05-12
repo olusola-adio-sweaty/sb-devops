@@ -36,7 +36,8 @@ Describe "Datadog Tests" -Tag "Acceptance" {
           eventhubNamespace = $EventhubNamespace
           functionAppNameInsights = $functionAppNameInsights
           functionAppName = $FunctionAppName
-          copies =2 
+          copies =2
+          env = "snd"
       }
   
       $TestTemplateParams = @{

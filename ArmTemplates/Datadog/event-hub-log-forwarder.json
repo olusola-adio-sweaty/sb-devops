@@ -68,12 +68,18 @@
       "metadata": {
         "description": "number of functins and event hubs"
       }
+    },
+    "env": {
+      "type": "string",
+      "metadata": {
+        "description": "Environment"
+      }
     }
   },
   "variables": {
     "eventHubTemplateLink": "https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/Datadog/event-hub.json",
     "functionAppTemplateLink": "https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/Datadog/function-app.json",
-    "appInsights": "sb-dev-api-datadog-ingest-ai",
+    "appInsights": "[concat('sb-', parameters('env'), '-api-datadog-ingest-ai')]",
     "logAnalyticWorspace": "/subscriptions/0caa9715-5f9b-4367-a8f3-e3636c7821c6/resourceGroups/defaultresourcegroup-suk/providers/microsoft.operationalinsights/workspaces/defaultworkspace-0caa9715-5f9b-4367-a8f3-e3636c7821c6-suk"
   },
   "resources": [

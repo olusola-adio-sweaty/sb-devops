@@ -37,6 +37,7 @@ Describe "Datadog Tests" -Tag "Acceptance" {
           functionAppNameInsights = $functionAppNameInsights
           functionAppName = $FunctionAppName
           copies = 2
+          env = "snd"
       }
   
       $TestTemplateParams = @{
