@@ -53,8 +53,8 @@
       "properties": {}
     },
     {
-      "name": "[concat(parameters('eventHubNamespace'),'/', parameters('eventHubName'),'-', copyIndex(1), '/Rule-', copyIndex(1))]",
-      "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
+      "name": "[concat(parameters('eventHubNamespace'),'/Rule-', copyIndex(1))]",
+      "type": "Microsoft.EventHub/namespaces/authorizationRules",
       "apiVersion": "2017-04-01",
       "copy": {
         "name": "nsg-loop",
