@@ -34,8 +34,9 @@
         "tier": "Standard",
         "capacity": 1
       },
-      "tags": {},
-      "properties": {},
+      "properties":{
+
+      },
       "resources": [
       ]
     },
