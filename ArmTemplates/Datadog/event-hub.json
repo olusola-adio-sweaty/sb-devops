@@ -33,7 +33,7 @@
         "tier": "Standard",
         "capacity": 1
       },
-      "properties":{
+      "properties": {
 
       },
       "resources": [
@@ -61,7 +61,8 @@
         "count": "[parameters('copies')]"
       },
       "dependsOn": [
-        "[concat('Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/eventhubs/', parameters('eventHubName'),'-', copyIndex(1))]"
+        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventHubNamespace'), concat(parameters('eventHubName'),'-', copyIndex(1)))]",
+        "[resourceId('Microsoft.EventHub/namespaces', parameters('eventHubNamespace'))]"
       ],
       "properties": {
         "rights": [ "Send", "Listen" ]
