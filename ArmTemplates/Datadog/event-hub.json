@@ -61,7 +61,7 @@
         "count": "[parameters('copies')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/eventhubs/', parameters('eventHubName'),'-', copyIndex(1))]"
+        "[concat('Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/eventhubs/', parameters('eventHubName'),'-', copyIndex(1))]"
       ],
       "properties": {
         "rights": [ "Send", "Listen" ]
