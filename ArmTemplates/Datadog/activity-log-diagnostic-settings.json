@@ -40,56 +40,56 @@
     },
     "resources": [
 
-        {
-            "type": "microsoft.insights/diagnosticSettings",
-            "copy": {
-                "name": "nsg-loop",
-                "count": "[parameters('copies')]"
-            },
-            "location": "West Europe",
-            "apiVersion": "2017-05-01-preview",
-            "name": "[concat( parameters('settingName'),'-',copyIndex(1))]",
-            "properties": {
-                // "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/eventhubs/',parameters('eventHubName'),'-', copyIndex(1),'/authorizationRules/','Rule-', copyIndex(1))]",
-                "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/authorizationRules/','DatadogRule-', copyIndex(1))]",
-                "eventHubName": "[concat(parameters('eventHubName'),'-',copyIndex(1))]",
-                "scope": "",
-                "logs": [
-                    {
-                        "category": "Administrative",
-                        "enabled": true
-                    },
-                    {
-                        "category": "Security",
-                        "enabled": true
-                    },
-                    {
-                        "category": "ServiceHealth",
-                        "enabled": true
-                    },
-                    {
-                        "category": "Alert",
-                        "enabled": true
-                    },
-                    {
-                        "category": "Recommendation",
-                        "enabled": true
-                    },
-                    {
-                        "category": "Policy",
-                        "enabled": true
-                    },
-                    {
-                        "category": "Autoscale",
-                        "enabled": true
-                    },
-                    {
-                        "category": "ResourceHealth",
-                        "enabled": true
-                    }
-                ]
-            }
-        }
+        // {
+        //     "type": "microsoft.insights/diagnosticSettings",
+        //     "copy": {
+        //         "name": "nsg-loop",
+        //         "count": "[parameters('copies')]"
+        //     },
+        //     "location": "West Europe",
+        //     "apiVersion": "2017-05-01-preview",
+        //     "name": "[concat( parameters('settingName'),'-',copyIndex(1))]",
+        //     "properties": {
+        //         // "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/eventhubs/',parameters('eventHubName'),'-', copyIndex(1),'/authorizationRules/','Rule-', copyIndex(1))]",
+        //         "eventHubAuthorizationRuleId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.EventHub/namespaces/', parameters('eventHubNamespace'),'/authorizationRules/','DatadogRule-', copyIndex(1))]",
+        //         "eventHubName": "[concat(parameters('eventHubName'),'-',copyIndex(1))]",
+        //         "scope": "",
+        //         "logs": [
+        //             {
+        //                 "category": "Administrative",
+        //                 "enabled": true
+        //             },
+        //             {
+        //                 "category": "Security",
+        //                 "enabled": true
+        //             },
+        //             {
+        //                 "category": "ServiceHealth",
+        //                 "enabled": true
+        //             },
+        //             {
+        //                 "category": "Alert",
+        //                 "enabled": true
+        //             },
+        //             {
+        //                 "category": "Recommendation",
+        //                 "enabled": true
+        //             },
+        //             {
+        //                 "category": "Policy",
+        //                 "enabled": true
+        //             },
+        //             {
+        //                 "category": "Autoscale",
+        //                 "enabled": true
+        //             },
+        //             {
+        //                 "category": "ResourceHealth",
+        //                 "enabled": true
+        //             }
+        //         ]
+        //     }
+        // }
 
     ]
 }
