@@ -20,7 +20,7 @@ Module documentation can be [found here](PSModules/README.md).
 
 ## PowerShell Scripts
 
-The PowerShell scripts directory contains scripts that can be used either in build and release definitions or from the command line.
+The PowerShell scripts directory contains scripts that can be used either in build and release definitions or from the command line
 
 ## Tests
 
