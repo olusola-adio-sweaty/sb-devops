@@ -25,6 +25,7 @@ stages:
           mainTemplates: ''
           allTemplatesMain: false
           cliOutputResults: true
+        continueOnError: true
 
       - script: |
           az bicep build --file BicepModules/*.bicep
@@ -38,6 +39,7 @@ stages:
           mainTemplates: ''
           allTemplatesMain: false
           cliOutputResults: true
+        continueOnError: true
 
       - task: PublishTestResults@2
         inputs:
