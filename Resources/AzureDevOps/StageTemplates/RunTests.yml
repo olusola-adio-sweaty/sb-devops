@@ -17,14 +17,14 @@ stages:
     - job: RunArmTemplateTests
       steps:
       - task: RunARMTTKTests@1
-      inputs:
-        templatelocation: '$(System.DefaultWorkingDirectory)\ArmTemplates'
-        resultLocation: '$(System.DefaultWorkingDirectory)/TEST-ArmTemplate.xml'
-        includeTests: ''
-        skipTests: ''
-        mainTemplates: ''
-        allTemplatesMain: false
-        cliOutputResults: true
+        inputs:
+          templatelocation: '$(System.DefaultWorkingDirectory)\ArmTemplates'
+          resultLocation: '$(System.DefaultWorkingDirectory)/TEST-ArmTemplate.xml'
+          includeTests: ''
+          skipTests: ''
+          mainTemplates: ''
+          allTemplatesMain: false
+          cliOutputResults: true
 
     # - template: ../JobTemplates/RunIndividualTest.yml
     #   parameters:
