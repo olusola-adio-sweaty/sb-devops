@@ -31,7 +31,7 @@
     },
     "resources": [
         {
-            "apiVersion": "2016-09-01",
+            "apiVersion": "2020-12-01",
             "type": "Microsoft.Web/hostingEnvironments",
             "condition": "[parameters('networkSecurityGroupAssigned')]",
             "name": "[parameters('name')]",
