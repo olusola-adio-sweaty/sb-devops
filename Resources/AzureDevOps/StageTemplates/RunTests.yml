@@ -6,34 +6,42 @@ parameters:
 stages:
 - stage: Test
   jobs:
-    - template: ../JobTemplates/RunIndividualTest.yml
-      parameters:
-        RequiresAzurePowershell: true
-        AzureSubscription: '${{ parameters.AzureSubscription }}'
-        TestName: 'RunAcceptanceTests'
-        TestType: 'ArmAcceptance'
-        ResultsFileSuffix: 'Acceptance'
-
-    - template: ../JobTemplates/RunIndividualTest.yml
-      parameters:
-        RequiresPowershellCore: true
-        TestName: 'RunQualityTests'
-        TestType: 'Quality'
-        ResultsFileSuffix: 'Quality'
+    # - template: ../JobTemplates/RunIndividualTest.yml
+    #   parameters:
+    #     RequiresAzurePowershell: true
+    #     AzureSubscription: '${{ parameters.AzureSubscription }}'
+    #     TestName: 'RunAcceptanceTests'
+    #     TestType: 'ArmAcceptance'
+    #     ResultsFileSuffix: 'Acceptance'
 
     - template: ../JobTemplates/RunIndividualTest.yml
       parameters:
         RequiresAzurePowershell: true
         AzureSubscription: '${{ parameters.AzureSubscription }}'
-        TestName: 'RunPowershell5UnitTests'
-        TestType: 'Unit'
-        ResultsFileSuffix: 'powershell'
-        CodeCoveragePercentage: ${{ parameters.Powershell5CodeCoveragePercentage }}
+        TestName: 'RunBicepAcceptanceTests'
+        TestType: 'BicepAcceptance'
+        ResultsFileSuffix: 'BicepAcceptance'
 
-    - template: ../JobTemplates/RunIndividualTest.yml
-      parameters:
-        RequiresPowershellCore: true
-        TestName: 'RunPowershellCoreUnitTests'
-        TestType: 'Unit'
-        ResultsFileSuffix: 'pwsh'
-        CodeCoveragePercentage: ${{ parameters.PowershellCoreCodeCoveragePercentage }}
+    # - template: ../JobTemplates/RunIndividualTest.yml
+    #   parameters:
+    #     RequiresPowershellCore: true
+    #     TestName: 'RunQualityTests'
+    #     TestType: 'Quality'
+    #     ResultsFileSuffix: 'Quality'
+
+    # - template: ../JobTemplates/RunIndividualTest.yml
+    #   parameters:
+    #     RequiresAzurePowershell: true
+    #     AzureSubscription: '${{ parameters.AzureSubscription }}'
+    #     TestName: 'RunPowershell5UnitTests'
+    #     TestType: 'Unit'
+    #     ResultsFileSuffix: 'powershell'
+    #     CodeCoveragePercentage: ${{ parameters.Powershell5CodeCoveragePercentage }}
+
+    # - template: ../JobTemplates/RunIndividualTest.yml
+    #   parameters:
+    #     RequiresPowershellCore: true
+    #     TestName: 'RunPowershellCoreUnitTests'
+    #     TestType: 'Unit'
+    #     ResultsFileSuffix: 'pwsh'
+    #     CodeCoveragePercentage: ${{ parameters.PowershellCoreCodeCoveragePercentage }}
