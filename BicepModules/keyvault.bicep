@@ -3,16 +3,24 @@ param keyVaultName string
 @description('Name of the resourcegroup')
 param location string = resourceGroup().location
 
-resource keyVaultName_resource 'Microsoft.KeyVault/vaults@2018-02-14' = {
+var keyVault = {
   name: keyVaultName
   location: location
+  sku_family: 'A'
+  sku_name: 'standard'
+  tenantId: subscription().tenantId
+}
+
+resource kv 'Microsoft.KeyVault/vaults@2018-02-14' = {
+  name: keyVault.name
+  location: keyVault.location
   tags: {}
   properties: {
     sku: {
-      family: 'A'
-      name: 'standard'
+      family: keyVault.sku_family
+      name: keyVault.sku_name
     }
-    tenantId: subscription().tenantId
+    tenantId: keyVault.tenantId
     accessPolicies: []
     enabledForDeployment: false
     enabledForDiskEncryption: false
@@ -21,4 +29,4 @@ resource keyVaultName_resource 'Microsoft.KeyVault/vaults@2018-02-14' = {
   }
 }
 
-output KeyVaultUri string = keyVaultName_resource.properties.vaultUri
+output KeyVaultUri string = kv.properties.vaultUri

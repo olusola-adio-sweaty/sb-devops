@@ -14,13 +14,25 @@ stages:
     #     TestType: 'ArmAcceptance'
     #     ResultsFileSuffix: 'Acceptance'
 
-    - template: ../JobTemplates/RunIndividualTest.yml
-      parameters:
-        RequiresAzurePowershell: true
-        AzureSubscription: '${{ parameters.AzureSubscription }}'
-        TestName: 'RunBicepAcceptanceTests'
-        TestType: 'BicepAcceptance'
-        ResultsFileSuffix: 'BicepAcceptance'
+    - job: RunArmTemplateTests
+      steps:
+      - task: RunARMTTKTests@1
+      inputs:
+        templatelocation: '$(System.DefaultWorkingDirectory)\ArmTemplates'
+        resultLocation: '$(System.DefaultWorkingDirectory)/TEST-ArmTemplate.xml'
+        includeTests: ''
+        skipTests: ''
+        mainTemplates: ''
+        allTemplatesMain: false
+        cliOutputResults: true
+
+    # - template: ../JobTemplates/RunIndividualTest.yml
+    #   parameters:
+    #     RequiresAzurePowershell: true
+    #     AzureSubscription: '${{ parameters.AzureSubscription }}'
+    #     TestName: 'RunBicepAcceptanceTests'
+    #     TestType: 'BicepAcceptance'
+    #     ResultsFileSuffix: 'BicepAcceptance'
 
     # - template: ../JobTemplates/RunIndividualTest.yml
     #   parameters:
