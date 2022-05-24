@@ -92,9 +92,6 @@
                 ]
             }
         },
-        "metadata": {
-            "comments": "The portsArray variable ensures a object is always available for the copy loops.  The output of these loops is unioned with other properties only if publicallyExposedPorts is not an empty array."
-        },
         "portsArray": "[if(empty(parameters('publicallyExposedPorts')), array(0), parameters('publicallyExposedPorts'))]",
         "portsObject": {
             "copy": [
@@ -114,7 +111,7 @@
         {
             "name": "[parameters('containerName')]",
             "type": "Microsoft.ContainerInstance/containerGroups",
-            "apiVersion": "2018-10-01",
+            "apiVersion": "2021-10-01",
             "location": "[parameters('location')]",
             "properties": "[variables('properties')]"
         }
