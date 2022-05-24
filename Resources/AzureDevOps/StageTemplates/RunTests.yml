@@ -19,12 +19,18 @@ stages:
       - task: RunARMTTKTests@1
         inputs:
           templatelocation: '$(System.DefaultWorkingDirectory)\ArmTemplates'
-          resultLocation: '$(System.DefaultWorkingDirectory)/TEST-ArmTemplate.xml'
+          resultLocation: '$(System.DefaultWorkingDirectory)/results'
           includeTests: ''
           skipTests: ''
           mainTemplates: ''
           allTemplatesMain: false
           cliOutputResults: true
+
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'NUnit'
+          testResultsFiles: '$(System.DefaultWorkingDirectory)\results\*-armttk.xml'
+        condition: always()
 
     # - template: ../JobTemplates/RunIndividualTest.yml
     #   parameters:
