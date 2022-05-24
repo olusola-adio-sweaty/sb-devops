@@ -13,11 +13,11 @@ resources:
 
 pool:
   name: 'DevOpsPool'
-trigger:
-  branches:
-    include:
-    - master
-    - dev
+# trigger:
+#   branches:
+#     include:
+#     - master
+#     - dev
 
 pr:
   branches:
