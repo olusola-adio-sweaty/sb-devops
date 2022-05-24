@@ -28,7 +28,7 @@ stages:
         continueOnError: true
 
       - script: |
-          az bicep build --file BicepModules/*.bicep
+          az bicep build --file BicepModules/**/*.bicep
 
       - task: RunARMTTKTests@1
         inputs:
