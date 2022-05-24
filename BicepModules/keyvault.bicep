@@ -11,7 +11,7 @@ var keyVault = {
   tenantId: subscription().tenantId
 }
 
-resource kv 'Microsoft.KeyVault/vaults@2018-02-14' = {
+resource kv 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
   name: keyVault.name
   location: keyVault.location
   tags: {}
