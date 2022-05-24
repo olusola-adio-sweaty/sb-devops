@@ -26,6 +26,19 @@ stages:
           allTemplatesMain: false
           cliOutputResults: true
 
+      - script: |
+          az bicep build --file BicepModules/*.bicep
+
+      - task: RunARMTTKTests@1
+        inputs:
+          templatelocation: '$(System.DefaultWorkingDirectory)\BicepModules'
+          resultLocation: '$(System.DefaultWorkingDirectory)/results'
+          includeTests: ''
+          skipTests: 'providers_apiVersions-Is-Not-Permitted'
+          mainTemplates: ''
+          allTemplatesMain: false
+          cliOutputResults: true
+
       - task: PublishTestResults@2
         inputs:
           testResultsFormat: 'NUnit'
