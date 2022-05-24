@@ -27,13 +27,19 @@ stages:
           cliOutputResults: true
         continueOnError: true
 
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'NUnit'
+          testResultsFiles: '$(System.DefaultWorkingDirectory)\results\*-armttk.xml'
+        condition: always()     
+      
       - script: |
           az bicep build --file BicepModules/keyvault.bicep
 
       - task: RunARMTTKTests@1
         inputs:
           templatelocation: '$(System.DefaultWorkingDirectory)\BicepModules'
-          resultLocation: '$(System.DefaultWorkingDirectory)/results'
+          resultLocation: '$(System.DefaultWorkingDirectory)/BicepResults'
           includeTests: ''
           skipTests: 'providers_apiVersions-Is-Not-Permitted'
           mainTemplates: ''
@@ -44,7 +50,7 @@ stages:
       - task: PublishTestResults@2
         inputs:
           testResultsFormat: 'NUnit'
-          testResultsFiles: '$(System.DefaultWorkingDirectory)\results\*-armttk.xml'
+          testResultsFiles: '$(System.DefaultWorkingDirectory)\BicepResults\*-armttk.xml'
         condition: always()
 
     # - template: ../JobTemplates/RunIndividualTest.yml
