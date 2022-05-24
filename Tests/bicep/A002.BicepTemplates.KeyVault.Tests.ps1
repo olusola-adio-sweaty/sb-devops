@@ -4,7 +4,7 @@ Describe "Key Vault Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll {
     $ResourceGroupName = "sb-test-template-rg"
-    $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\keyvault.json"
+    $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\keyvault.bicep"
 
   }
 
