@@ -21,7 +21,7 @@ stages:
           templatelocation: '$(System.DefaultWorkingDirectory)\ArmTemplates'
           resultLocation: '$(System.DefaultWorkingDirectory)/results'
           includeTests: ''
-          skipTests: ''
+          skipTests: 'providers_apiVersions-Is-Not-Permitted'
           mainTemplates: ''
           allTemplatesMain: false
           cliOutputResults: true
