@@ -31,7 +31,7 @@
         },
         "location": {
             "type": "string",
-            "defaultValue": "resourceGroup().location"
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {

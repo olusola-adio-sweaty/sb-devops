@@ -63,7 +63,7 @@
         },
         "location": {
             "type": "string",
-            "defaultValue": "resourceGroup().location"
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {
@@ -76,7 +76,7 @@
             "type": "Microsoft.Web/sites",
             "apiVersion": "2020-12-01",
             "kind": "[parameters('appServiceType')]",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "Identity": {
                 "type": "SystemAssigned"
             },
