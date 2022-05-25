@@ -33,7 +33,7 @@
         {
             "name": "[concat(parameters('serviceBusNamespaceName'), '/', parameters('serviceBusTopicName'))]",
             "type": "Microsoft.ServiceBus/namespaces/topics",
-            "apiVersion": "2017-04-01",
+            "apiVersion": "2021-11-01",
             "properties": {
                 "path": "[parameters('serviceBusTopicName')]",
                 "defaultMessageTimeToLive": "[parameters('messageDefaultTTL')]",

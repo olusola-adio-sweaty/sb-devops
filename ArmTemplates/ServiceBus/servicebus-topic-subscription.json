@@ -35,13 +35,13 @@
         {
             "name": "[variables('fullSBTopicSubscriptionName')]",
             "type": "Microsoft.ServiceBus/namespaces/topics/subscriptions",
-            "apiVersion": "2017-04-01",
+            "apiVersion": "2021-11-01",
             "properties": {}
         },
         {
             "name": "[concat(variables('fullSBTopicSubscriptionName'), '/', parameters('serviceBusTopicName'), '-sqlfilter')]",
             "type": "Microsoft.ServiceBus/namespaces/topics/subscriptions/rules",
-            "apiVersion": "2017-04-01",
+            "apiVersion": "2021-11-01",
             "condition": "[greater(length(parameters('subscriptionSqlFilter')), 0)]",
             "dependsOn": [
                 "[parameters('serviceBusTopicSubscriptionName')]"

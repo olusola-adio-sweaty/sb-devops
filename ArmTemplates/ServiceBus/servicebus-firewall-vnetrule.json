@@ -52,7 +52,7 @@
         {
             "type": "Microsoft.ServiceBus/namespaces/networkruleset",
             "name": "[variables('namespaceNetworkRuleSetName')]",
-            "apiVersion": "2018-01-01-preview",
+            "apiVersion": "2021-11-01",
             "location": "[parameters('location')]",
             "tags": {},
             "properties": {

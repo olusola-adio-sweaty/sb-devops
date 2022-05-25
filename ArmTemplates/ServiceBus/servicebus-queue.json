@@ -61,7 +61,7 @@
         {
             "name": "[concat(parameters('serviceBusNamespaceName'), '/', parameters('queueName'))]",
             "type": "Microsoft.ServiceBus/namespaces/queues",
-            "apiVersion": "2017-04-01",
+            "apiVersion": "2021-11-01",
             "properties": {
                 "lockDuration": "[parameters('MessageLockDuration')]",
                 "maxSizeInMegabytes": "[parameters('MaxSizeInMegabytes')]",

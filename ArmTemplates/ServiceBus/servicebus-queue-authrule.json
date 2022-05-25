@@ -36,7 +36,7 @@
         {
             "type": "Microsoft.ServiceBus/namespaces/queues/authorizationRules",
             "name": "[concat(parameters('servicebusName'),'/',parameters('queueName'), '/', parameters('authorizationRuleName'))]",
-            "apiVersion": "2018-01-01-preview",
+            "apiVersion": "2021-11-01",
             "location": "[parameters('location')]",
             "tags": {},
             "properties": {

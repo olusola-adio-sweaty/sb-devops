@@ -36,7 +36,7 @@
         {
             "type": "Microsoft.ServiceBus/namespaces/topics/authorizationRules",
             "name": "[concat(parameters('servicebusName'),'/',parameters('topicName'), '/', parameters('authorizationRuleName'))]",
-            "apiVersion": "2017-04-01",
+            "apiVersion": "2021-11-01",
             "location": "[parameters('location')]",
             "tags": {},
             "properties": {
