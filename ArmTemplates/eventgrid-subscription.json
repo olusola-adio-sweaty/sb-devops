@@ -10,6 +10,11 @@
         },
         "eventGridSubscriptionUrl": {
             "type": "String"
+        },
+        "location": {
+            "type":"string",
+            "defaultValue": 
+                "resourceGroup().location"
         }
     },
     "variables": {},
@@ -17,7 +22,7 @@
         {
             "name": "[concat(parameters('eventGridTopicName'), '/Microsoft.EventGrid/', parameters('eventGridSubscriptionName'))]",
             "type": "Microsoft.EventGrid/topics/providers/eventSubscriptions",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "apiVersion": "2020-04-01-preview",
             "properties": {
                 "destination": {

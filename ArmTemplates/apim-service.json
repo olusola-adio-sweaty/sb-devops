@@ -64,6 +64,11 @@
         "vnetName": {
             "type": "string",
             "defaultValue": ""
+        },
+        "location": {
+            "type":"string",
+            "defaultValue": 
+                "resourceGroup().location"
         }
     },
     "variables": {
@@ -96,7 +101,7 @@
         {
             "name": "[parameters('apimServiceName')]",
             "type": "Microsoft.ApiManagement/service",
-            "apiVersion": "2019-01-01",
+            "apiVersion": "2021-12-01-preview",
             "tags": {},
             "properties": {
                 "hostnameConfigurations": "[variables('apimHostnameProperties')]",
@@ -112,7 +117,7 @@
             "identity": {
                 "type": "SystemAssigned"
             },
-            "location": "[resourceGroup().location]"
+            "location": "[parameters('location')]"
         }
     ],
     "outputs": {

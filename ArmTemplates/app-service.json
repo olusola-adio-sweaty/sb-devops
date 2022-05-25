@@ -64,6 +64,11 @@
         "clientAffinity": {
             "type": "bool",
             "defaultValue": false
+        },
+        "location": {
+            "type":"string",
+            "defaultValue": 
+                "resourceGroup().location"
         }
     },
     "variables": {
@@ -74,9 +79,9 @@
         {
             "name": "[parameters('appServiceName')]",
             "type": "Microsoft.Web/sites",
-            "apiVersion": "2018-11-01",
+            "apiVersion": "2020-12-01",
             "kind": "[parameters('appServiceType')]",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "Identity": {
                 "type": "SystemAssigned"
             },
@@ -97,8 +102,8 @@
                     "condition": "[parameters('deployStagingSlot')]",
                     "name": "staging",
                     "type": "slots",
-                    "apiVersion": "2018-11-01",
-                    "location": "[resourceGroup().location]",
+                    "apiVersion": "2020-12-01",
+                    "location": "[parameters('location')]",
                     "properties": {
                         "clientAffinityEnabled": "[parameters('clientAffinity')]",
                         "siteConfig": {
@@ -118,8 +123,8 @@
             "type": "Microsoft.Web/sites/hostnameBindings",
             "condition": "[variables('UseCustomHostname')]",
             "name": "[concat(parameters('appServiceName'), '/', if(variables('useCustomHostname'), parameters('customHostname'), 'placeholder'))]",
-            "apiVersion": "2016-08-01",
-            "location": "[resourceGroup().location]",
+            "apiVersion": "2020-12-01",
+            "location": "[parameters('location')]",
             "properties": {
                 "sslState": "SniEnabled",
                 "thumbprint": "[parameters('certificateThumbprint')]"

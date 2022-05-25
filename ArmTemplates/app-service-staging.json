@@ -60,6 +60,11 @@
         "clientAffinity": {
             "type": "bool",
             "defaultValue": false
+        },
+        "location": {
+            "type":"string",
+            "defaultValue": 
+                "resourceGroup().location"
         }
     },
     "variables": {
@@ -112,7 +117,7 @@
             "condition": "[variables('UseCustomHostname')]",
             "name": "[concat(parameters('appServiceName'), '/', if(variables('useCustomHostname'), parameters('customHostname'), 'placeholder'))]",
             "apiVersion": "2020-12-01",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "properties": {
                 "sslState": "SniEnabled",
                 "thumbprint": "[parameters('certificateThumbprint')]"

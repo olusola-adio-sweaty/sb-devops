@@ -22,7 +22,7 @@
         {
             "name": "[variables('FileShareName')]",
             "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
-            "apiVersion": "2019-04-01",
+            "apiVersion": "2021-09-01",
             "properties": {
             }
         }
