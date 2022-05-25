@@ -40,7 +40,7 @@
         {
             "name": "[variables('hostingPlanName')]",
             "type": "Microsoft.Web/serverfarms",
-            "apiVersion": "2020-12-01",
+            "apiVersion": "2021-03-01",
             "location": "[parameters('location')]",
             "properties": {
                 "name": "[variables('hostingPlanName')]",
@@ -63,7 +63,7 @@
         },
         {
             "name": "[variables('functionAppName')]",
-            "apiVersion": "2020-12-01",
+            "apiVersion": "2021-03-01",
             "type": "Microsoft.Web/sites",
             "location": "[parameters('location')]",
             "kind": "functionapp",
