@@ -13,14 +13,18 @@
         },
         "aseVNetResourceGroupName": {
             "type": "string"
-        }
+        },
+    "location": {
+      "type": "string",
+      "defaultValue": "resourceGroup().location"
+    }
     },
     "resources": [
         {
             "apiVersion": "2015-06-15",
             "type": "Microsoft.Network/networkSecurityGroups",
             "name": "[parameters('name')]",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "properties": {
                 "securityRules": [
                     {

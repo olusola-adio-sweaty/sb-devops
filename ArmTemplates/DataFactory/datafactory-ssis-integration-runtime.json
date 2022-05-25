@@ -19,12 +19,12 @@
             "metadata": {
                 "description": "Description of the integration runtime"
             }
-        },        
+        },
         "NodeSize": {
             "type": "string",
             "metadata": {
                 "description": "Size of the integration runtime node"
-            }            
+            }
         },
         "NodeCount": {
             "type": "int",
@@ -33,7 +33,7 @@
                 "description": "Number of nodes to run the integration runtime upon"
             }
         },
-        "MaxConcurrentJobsPerNode":{
+        "MaxConcurrentJobsPerNode": {
             "type": "int",
             "defaultValue": 8,
             "metadata": {
@@ -57,6 +57,10 @@
             "metadata": {
                 "description": "Password to access the SSIS catalog."
             }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
         }
     },
     "resources": [
@@ -69,7 +73,7 @@
                 "description": "[parameters('RuntimeDescription')]",
                 "typeProperties": {
                     "computeProperties": {
-                        "location": "[resourceGroup().location]",
+                        "location": "[parameters('location')]",
                         "nodeSize": "[parameters('NodeSize')]",
                         "numberOfNodes": "[parameters('NodeCount')]",
                         "maxParallelExecutionsPerNode": "[parameters('MaxConcurrentJobsPerNode')]"

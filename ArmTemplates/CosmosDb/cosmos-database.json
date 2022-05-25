@@ -69,7 +69,7 @@
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/apis/databases",
             "name": "[concat(parameters('accountName'), '/sql/', parameters('databaseName'))]",
-            "apiVersion": "2016-03-31",
+            "apiVersion": "2015-04-08",
             "properties": "[variables('DatabaseProperties')]"
         },
         {

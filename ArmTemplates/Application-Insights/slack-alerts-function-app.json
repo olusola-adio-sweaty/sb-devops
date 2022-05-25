@@ -25,6 +25,11 @@
             "metadata": {
                 "description": "The name of the channel (without the leading #) that you want messages posted to"
             }
+        },
+        "location": {
+            "type":"string",
+            "defaultValue": 
+                "resourceGroup().location"
         }
     },
     "variables": {
@@ -36,8 +41,8 @@
         {
             "name": "[variables('hostingPlanName')]",
             "type": "Microsoft.Web/serverfarms",
-            "apiVersion": "2015-04-01",            
-            "location": "[resourceGroup().location]",
+            "apiVersion": "2020-12-01",            
+            "location": "[parameters('location')]",
             "properties": {
                 "name": "[variables('hostingPlanName')]",
                 "computeMode": "Dynamic",
@@ -45,10 +50,10 @@
             }
         },
         {
-            "apiVersion": "2015-05-01",
+            "apiVersion": "2020-02-02-preview",
             "name": "[variables('appInsightsName')]",
             "type": "Microsoft.Insights/components",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "kind": "web",
             "tags": {
                 "[concat('hidden-link:', resourceId('Microsoft.Web/sites', variables('appInsightsName')))]": "Resource"
@@ -59,9 +64,9 @@
         },
         {
             "name": "[variables('functionAppName')]",
-            "apiVersion": "2018-11-01",
+            "apiVersion": "2020-12-01",
             "type": "Microsoft.Web/sites",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "kind": "functionapp",
             "dependsOn": [
                 "[variables('appInsightsName')]",
