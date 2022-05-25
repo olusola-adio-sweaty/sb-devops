@@ -21,7 +21,7 @@ stages:
           templatelocation: '$(System.DefaultWorkingDirectory)\ArmTemplates'
           resultLocation: '$(System.DefaultWorkingDirectory)/results'
           includeTests: ''
-          skipTests: 'providers_apiVersions-Is-Not-Permitted,Outputs Must Not Contain Secrets'
+          skipTests: 'providers_apiVersions-Is-Not-Permitted,Outputs Must Not Contain Secrets,Template Should Not Contain Blanks'
           mainTemplates: ''
           allTemplatesMain: false
           cliOutputResults: true
@@ -41,7 +41,7 @@ stages:
           templatelocation: '$(System.DefaultWorkingDirectory)\BicepModules'
           resultLocation: '$(System.DefaultWorkingDirectory)/BicepResults'
           includeTests: ''
-          skipTests: 'providers_apiVersions-Is-Not-Permitted,Outputs Must Not Contain Secrets'
+          skipTests: 'providers_apiVersions-Is-Not-Permitted,Outputs Must Not Contain Secrets,Template Should Not Contain Blanks'
           mainTemplates: ''
           allTemplatesMain: false
           cliOutputResults: true

@@ -37,7 +37,7 @@
             "properties": {
                 "loggerType": "applicationInsights",
                 "credentials": {
-                    "instrumentationKey": "[reference(concat('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]"
+                    "instrumentationKey": "[reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]"
                 },
                 "isBuffered": true
             },
