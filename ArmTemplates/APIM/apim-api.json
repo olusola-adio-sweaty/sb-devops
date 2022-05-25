@@ -88,18 +88,18 @@
         {
             "name": "[concat(parameters('apimServiceName'), '/', variables('apimApiVersionName'))]",
             "type": "Microsoft.ApiManagement/service/apis",
-            "apiVersion": "2019-01-01",
+            "apiVersion": "2021-08-01",
             "properties": "[if(equals(parameters('apiVersion'), ''), variables('apiProperties').noversion, variables('apiProperties').versioned)]",
             "resources": [
                 {
                     "name": "applicationinsights",
                     "type": "diagnostics",
                     "condition": "[greater(length(parameters('apimLoggerName')), 0)]",
-                    "apiVersion": "2019-01-01",
+                    "apiVersion": "2021-08-01",
                     "properties": {
                         "enabled": true,
                         "alwaysLog": "allErrors",
-                        "loggerId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.ApiManagement/service/', parameters('apimServiceName'), '/loggers/', parameters('apimLoggerName'))]",
+                        "loggerId": "[resourceId('Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), parameters('apimLoggerName'))]",
                         "sampling": {
                             "samplingType": "fixed",
                             "percentage": "[parameters('loggerSamplingPercentage')]"
@@ -111,7 +111,7 @@
                             "name": "[variables('loggerName')]",
                             "type": "loggers",
                             "condition": "[not(equals(parameters('apimLoggerName'), ''))]",
-                            "apiVersion": "2018-01-01",
+                            "apiVersion": "2021-08-01",
                             "dependsOn": [
                                 "applicationinsights"
                             ]
@@ -129,9 +129,9 @@
             "name": "[concat(parameters('apimServiceName'), '/', parameters('apimProductInstanceName'), '/', variables('apimApiVersionName'))]",
             "type": "Microsoft.ApiManagement/service/products/apis",
             "condition": "[not(equals(parameters('apimProductInstanceName'), ''))]",
-            "apiVersion": "2019-01-01",
+            "apiVersion": "2021-08-01",
             "dependsOn": [
-                "[concat('Microsoft.ApiManagement/service/', parameters('apimServiceName'), '/apis/', variables('apimApiVersionName'))]"
+                "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), variables('apimApiVersionName'))]"
             ]
         }
     ],
