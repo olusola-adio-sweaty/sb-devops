@@ -186,7 +186,7 @@
       "type": "microsoft.operationalinsights/workspaces",
       "apiVersion": "2021-12-01-preview",
       "name": "[variables('logAnalyticWorspace')]",
-      "location": "westeurope",
+      "location": "[parameters('location')]",
       "properties": {
         "sku": {
           "name": "pergb2018"
