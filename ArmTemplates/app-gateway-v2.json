@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "appGatewayName": {
@@ -141,6 +141,10 @@
             "metadata": {
                 "description": "Number of days to retain the log files for (set to 0 to disable retention policy)"
             }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {
@@ -269,11 +273,11 @@
                 "input": {
                     "name": "[parameters('backendPools')[copyIndex('backendAddressPools')].name]",
                     "properties": {
-                      "BackendAddresses": [
-                          {
-                            "fqdn": "[parameters('backendPools')[copyIndex('backendAddressPools')].fqdn]"
-                          }
-                      ]
+                        "BackendAddresses": [
+                            {
+                                "fqdn": "[parameters('backendPools')[copyIndex('backendAddressPools')].fqdn]"
+                            }
+                        ]
                     }
                 }
             },
@@ -317,8 +321,8 @@
         {
             "name": "[parameters('appGatewayName')]",
             "type": "Microsoft.Network/applicationGateways",
-            "apiVersion": "2019-08-01",
-            "location": "[resourceGroup().location]",
+            "apiVersion": "2020-11-01",
+            "location": "[parameters('location')]",
             "properties": {
                 "sku": {
                     "name": "[parameters('appGatewayTier')]",
@@ -390,7 +394,7 @@
                         "name": "[concat(parameters('appGatewayName'), '-diagnositics')]",
                         "storageAccountId": "[if(empty(parameters('logStorageAccountId')), json('null'), parameters('logStorageAccountId'))]",
                         "workspaceId": "[if(empty(parameters('logWorkspaceId')), json('null'), parameters('logWorkspaceId'))]",
-                        "logs": [ 
+                        "logs": [
                             {
                                 "category": "ApplicationGatewayAccessLog",
                                 "enabled": true,

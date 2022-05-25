@@ -55,6 +55,10 @@
             "metadata": {
                 "description": "Resource group the App Service Environment belongs to - only required if aseHostingEnvironmentName specified"
             }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {
@@ -91,9 +95,9 @@
     "resources": [
         {
             "type": "Microsoft.Web/serverfarms",
-            "apiVersion": "2016-09-01",
+            "apiVersion": "2020-12-01",
             "name": "[parameters('appServicePlanName')]",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "sku": "[if(variables('DeployToASE'), variables('defaultAppServicePlanSKUs').Isolated, variables('defaultAppServicePlanSKUs').NonASE)]",
             "properties": "[if(variables('DeployToASE'), variables('ASPResourceProperties').WithASE, variables('ASPResourceProperties').WithoutASE)]"
         }

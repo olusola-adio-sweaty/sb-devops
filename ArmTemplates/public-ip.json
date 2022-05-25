@@ -36,6 +36,10 @@
             "metadata": {
                 "description": "Optionally set a DNS label on public IP address"
             }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {
@@ -54,14 +58,14 @@
     "resources": [
         {
             "name": "[parameters('ipAddressName')]",
-            "apiVersion": "2018-10-01",
+            "apiVersion": "2020-05-01",
             "type": "Microsoft.Network/publicIPAddresses",
-            "location": "[resourceGroup().location]",
-            "sku":{
+            "location": "[parameters('location')]",
+            "sku": {
                 "name": "[parameters('ipAddressSku')]"
             },
             "properties": "[if(equals(length(parameters('publicDnsLabel')),0), variables('publicIPAddressProperties').withoutDnsLabel, variables('publicIPAddressProperties').withDnsLabel)]"
-        }       
+        }
     ],
     "outputs": {
         "publicIpAddressId": {

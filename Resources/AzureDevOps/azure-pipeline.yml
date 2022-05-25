@@ -13,11 +13,11 @@ resources:
 
 pool:
   name: 'DevOpsPool'
-trigger:
-  branches:
-    include:
-    - master
-    - dev
+# trigger:
+#   branches:
+#     include:
+#     - master
+#     - dev
 
 pr:
   branches:
@@ -32,4 +32,5 @@ stages:
     AzureSubscription: 'sb(318061ea-2105-42da-82d9-b65e8e31017f)'
     Powershell5CodeCoveragePercentage: 38
     PowershellCoreCodeCoveragePercentage: 30
+
 

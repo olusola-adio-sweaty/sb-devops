@@ -13,6 +13,10 @@
         },
         "aseVNetResourceGroupName": {
             "type": "string"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "resources": [
@@ -20,7 +24,7 @@
             "apiVersion": "2015-06-15",
             "type": "Microsoft.Network/networkSecurityGroups",
             "name": "[parameters('name')]",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "properties": {
                 "securityRules": [
                     {
@@ -43,7 +47,7 @@
                             "protocol": "Tcp",
                             "sourcePortRange": "*",
                             "destinationPortRange": "*",
-                            "sourceAddressPrefix": "[reference(resourceId(parameters('aseVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('aseVnetName'), parameters('aseSubnetName')), '2018-07-01', 'Full').properties.addressPrefix]",
+                            "sourceAddressPrefix": "[reference(resourceId(parameters('aseVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('aseVnetName'), parameters('aseSubnetName')), '2022-01-01', 'Full').properties.addressPrefix]",
                             "destinationAddressPrefix": "*",
                             "access": "Allow",
                             "priority": 110,
@@ -174,7 +178,7 @@
                             "sourcePortRange": "*",
                             "destinationPortRange": "*",
                             "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "[reference(resourceId(parameters('aseVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('aseVnetName'), parameters('aseSubnetName')), '2018-07-01', 'Full').properties.addressPrefix]",
+                            "destinationAddressPrefix": "[reference(resourceId(parameters('aseVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('aseVnetName'), parameters('aseSubnetName')), '2022-01-01', 'Full').properties.addressPrefix]",
                             "access": "Allow",
                             "priority": 160,
                             "direction": "Outbound"

@@ -74,19 +74,23 @@
       "metadata": {
         "description": "Environment"
       }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
     }
   },
   "variables": {
     "eventHubTemplateLink": "https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/Datadog/event-hub.json",
     "functionAppTemplateLink": "https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/Datadog/function-app.json",
     "appInsights": "[concat('sb-', parameters('env'), '-api-datadog-ingest-ai')]",
-    "logAnalyticWorspace": "/subscriptions/0caa9715-5f9b-4367-a8f3-e3636c7821c6/resourceGroups/defaultresourcegroup-suk/providers/microsoft.operationalinsights/workspaces/defaultworkspace-0caa9715-5f9b-4367-a8f3-e3636c7821c6-suk"
+    "logAnalyticWorspace": "[concat('sb-', parameters('env'), '-api-datadog-la')]"
   },
   "resources": [
     {
       "name": "eventHubTemplate",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2018-05-01",
+      "apiVersion": "2021-04-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -110,7 +114,7 @@
     {
       "name": "functionAppTemplate",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2018-05-01",
+      "apiVersion": "2021-04-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -162,20 +166,42 @@
       },
       "apiVersion": "2020-02-02",
       "name": "[concat(variables('appInsights'),'-',copyIndex(1))]",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "kind": "web",
       "properties": {
         "Application_Type": "web",
         "Flow_Type": "Redfield",
         "Request_Source": "IbizaWebAppExtensionCreate",
         "RetentionInDays": 90,
-        "WorkspaceResourceId": "[variables('logAnalyticWorspace')]",
+        "WorkspaceResourceId": "[resourceId('microsoft.operationalinsights/workspaces',variables('logAnalyticWorspace'))]",
         "IngestionMode": "LogAnalytics",
+        "publicNetworkAccessForIngestion": "Enabled",
+        "publicNetworkAccessForQuery": "Enabled"
+      },
+      "dependsOn": [
+        "[resourceId('microsoft.operationalinsights/workspaces', variables('logAnalyticWorspace'))]"
+      ]
+    },
+    {
+      "type": "microsoft.operationalinsights/workspaces",
+      "apiVersion": "2021-12-01-preview",
+      "name": "[variables('logAnalyticWorspace')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "sku": {
+          "name": "pergb2018"
+        },
+        "retentionInDays": 30,
+        "features": {
+          "enableLogAccessUsingOnlyResourcePermissions": true
+        },
+        "workspaceCapping": {
+          "dailyQuotaGb": -1
+        },
         "publicNetworkAccessForIngestion": "Enabled",
         "publicNetworkAccessForQuery": "Enabled"
       }
     }
-
   ],
   "outputs": {
     "eventHubNamespace": {

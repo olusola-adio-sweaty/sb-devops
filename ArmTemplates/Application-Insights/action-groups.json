@@ -27,20 +27,24 @@
         "emailPropertyArray": [
             {},
             {
-                "emailReceivers": [{
-                    "name": "[parameters('actionGroupName')]",
-                    "emailAddress": "[parameters('EmailAddress')]",
-                    "useCommonAlertSchema": true
-                }]
+                "emailReceivers": [
+                    {
+                        "name": "[parameters('actionGroupName')]",
+                        "emailAddress": "[parameters('EmailAddress')]",
+                        "useCommonAlertSchema": true
+                    }
+                ]
             }
         ],
         "webhookPropertyArray": [
             {},
             {
-                "webhookReceivers": [{
-                    "name": "[concat(parameters('actionGroupName'), '-webhook')]",
-                    "serviceUri": "[parameters('webHookUrl')]"
-                }]
+                "webhookReceivers": [
+                    {
+                        "name": "[concat(parameters('actionGroupName'), '-webhook')]",
+                        "serviceUri": "[parameters('webHookUrl')]"
+                    }
+                ]
             }
         ],
         "webHookPropertyEntry": "[if(empty(parameters('webHookUrl')), 0, 1)]",
@@ -56,7 +60,7 @@
             "location": "global",
             "tags": {},
             "properties": "[variables('groupProperties')]"
-          }
+        }
     ],
     "outputs": {
         "Properties": {

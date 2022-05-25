@@ -56,6 +56,10 @@
         "originPath": {
             "type": "string",
             "defaultValue": ""
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {
@@ -168,12 +172,12 @@
         {
             "name": "[variables('fullEndpointName')]",
             "type": "Microsoft.Cdn/profiles/endpoints",
-            "apiVersion": "2017-10-12",
-            "location": "[resourceGroup().location]",
+            "apiVersion": "2016-04-02",
+            "location": "[parameters('location')]",
             "properties": "[if(equals(parameters('originPath'), ''), variables('endpointProperties').withoutOriginPath, variables('endpointProperties').withOriginPath)]"
         },
         {
-            "apiVersion": "2017-10-12",
+            "apiVersion": "2016-04-02",
             "condition": "[variables('customDomainEnabled')]",
             "type": "Microsoft.Cdn/profiles/endpoints/customDomains",
             "name": "[concat(variables('fullEndpointName'), '/', if(variables('customDomainEnabled'), replace(parameters('customDomainName'), '.', '-'), 'placeholder'))]",

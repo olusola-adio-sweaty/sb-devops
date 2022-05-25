@@ -1,6 +1,6 @@
 {
     "contentVersion": "1.0.0.0",
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "parameters": {
         "accountName": {
             "type": "string",
@@ -71,8 +71,7 @@
             "type": "Microsoft.DocumentDb/databaseAccounts/apis/databases/containers",
             "name": "[concat(parameters('accountName'), '/sql/', parameters('databaseName'), '/', parameters('collectionName'))]",
             "apiVersion": "2016-03-31",
-            "properties":
-            {
+            "properties": {
                 "resource": "[variables('fullResourceProperties')]"
             }
         },
@@ -81,12 +80,11 @@
             "type": "Microsoft.DocumentDb/databaseAccounts/apis/databases/containers/settings",
             "name": "[concat(parameters('accountName'), '/sql/', parameters('databaseName'), '/', parameters('collectionName'), '/throughput')]",
             "apiVersion": "2016-03-31",
-            "dependsOn": [ 
+            "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts/apis/databases/containers', parameters('accountName'), 'sql', parameters('databaseName'), parameters('collectionName'))]"
             ],
-            "properties":
-            {
-                "resource":{
+            "properties": {
+                "resource": {
                     "throughput": "[parameters('offerThroughput')]"
                 }
             }

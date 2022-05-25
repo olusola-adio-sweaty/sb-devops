@@ -14,6 +14,45 @@ stages:
         TestType: 'ArmAcceptance'
         ResultsFileSuffix: 'Acceptance'
 
+    - job: RunArmTemplateTests
+      steps:
+      - task: RunARMTTKTests@1
+        inputs:
+          templatelocation: '$(System.DefaultWorkingDirectory)\ArmTemplates'
+          resultLocation: '$(System.DefaultWorkingDirectory)/results'
+          includeTests: ''
+          skipTests: 'providers_apiVersions-Is-Not-Permitted'
+          mainTemplates: ''
+          allTemplatesMain: false
+          cliOutputResults: true
+        continueOnError: true
+
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'NUnit'
+          testResultsFiles: '$(System.DefaultWorkingDirectory)\results\*-armttk.xml'
+        condition: always()     
+      
+      - script: |
+          az bicep build --file BicepModules/keyvault.bicep
+
+      - task: RunARMTTKTests@1
+        inputs:
+          templatelocation: '$(System.DefaultWorkingDirectory)\BicepModules'
+          resultLocation: '$(System.DefaultWorkingDirectory)/BicepResults'
+          includeTests: ''
+          skipTests: 'providers_apiVersions-Is-Not-Permitted,Outputs Must Not Contain Secrets'
+          mainTemplates: ''
+          allTemplatesMain: false
+          cliOutputResults: true
+        continueOnError: true
+
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'NUnit'
+          testResultsFiles: '$(System.DefaultWorkingDirectory)\BicepResults\*-armttk.xml'
+        condition: always()
+
     - template: ../JobTemplates/RunIndividualTest.yml
       parameters:
         RequiresPowershellCore: true

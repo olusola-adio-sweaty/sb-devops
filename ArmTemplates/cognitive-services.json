@@ -47,15 +47,19 @@
                 "S3",
                 "S4"
             ]
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {
-        "location": "[if(or(startsWith(parameters('cognitiveServiceType'), 'Bing'), equals(parameters('cognitiveServiceType'), 'TextTranslation')), 'global', resourceGroup().location)]"
+        "location": "[if(or(startsWith(parameters('cognitiveServiceType'), 'Bing'), equals(parameters('cognitiveServiceType'), 'TextTranslation')), 'global', parameters('location'))]"
     },
     "resources": [
         {
             "name": "[parameters('cognitiveServiceName')]",
-            "apiVersion": "2017-04-18",
+            "apiVersion": "2022-03-01",
             "location": "[variables('location')]",
             "type": "Microsoft.CognitiveServices/accounts",
             "kind": "[parameters('cognitiveServiceType')]",
@@ -68,7 +72,7 @@
     "outputs": {
         "cognitiveServicePrimaryKey": {
             "type": "string",
-            "value": "[listKeys(resourceId('Microsoft.CognitiveServices/accounts', parameters('cognitiveServiceName')), '2017-04-18').key1]"
+            "value": "[listKeys(resourceId('Microsoft.CognitiveServices/accounts', parameters('cognitiveServiceName')), '2022-03-01').key1]"
         }
     }
 }

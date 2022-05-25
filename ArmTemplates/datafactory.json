@@ -47,7 +47,7 @@
         }
     },
     "variables": {
-        "dataFactoryProperties" : "[if(and(equals(parameters('VstsAccountName'), ''),equals(parameters('GitHubAccountName'), '')), '', if(equals(parameters('VstsAccountName'), ''), variables('githubRepoConfig'), variables('vstsRepoConfig'))) ]",
+        "dataFactoryProperties": "[if(and(equals(parameters('VstsAccountName'), ''),equals(parameters('GitHubAccountName'), '')), '', if(equals(parameters('VstsAccountName'), ''), variables('githubRepoConfig'), variables('vstsRepoConfig'))) ]",
         "githubRepoConfig": {
             "repoConfiguration": {
                 "accountName": "[parameters('GitHubAccountName')]",
@@ -57,7 +57,7 @@
                 "rootFolder": "/",
                 "type": "FactoryGitHubConfiguration",
                 "lastCommitId": ""
-              }
+            }
         },
         "vstsRepoConfig": {
             "repoConfiguration": {
@@ -68,7 +68,7 @@
                 "rootFolder": "/",
                 "type": "FactoryVSTSConfiguration",
                 "lastCommitId": ""
-              }
+            }
         }
     },
     "resources": [

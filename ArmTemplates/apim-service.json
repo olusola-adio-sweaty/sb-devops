@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "adminEmail": {
@@ -64,6 +64,10 @@
         "vnetName": {
             "type": "string",
             "defaultValue": ""
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {
@@ -75,7 +79,7 @@
             "keyVaultId": "[parameters('portalKeyVaultCertificatePath')]",
             "negotiateClientCertificate": false
         },
-        "apimProxyHostnameProperties":  {
+        "apimProxyHostnameProperties": {
             "type": "Proxy",
             "hostName": "[variables('apimProxyHostname')]",
             "keyVaultId": "[parameters('ProxyKeyVaultCertificatePath')]",
@@ -96,7 +100,7 @@
         {
             "name": "[parameters('apimServiceName')]",
             "type": "Microsoft.ApiManagement/service",
-            "apiVersion": "2019-01-01",
+            "apiVersion": "2021-12-01-preview",
             "tags": {},
             "properties": {
                 "hostnameConfigurations": "[variables('apimHostnameProperties')]",
@@ -112,7 +116,7 @@
             "identity": {
                 "type": "SystemAssigned"
             },
-            "location": "[resourceGroup().location]"
+            "location": "[parameters('location')]"
         }
     ],
     "outputs": {

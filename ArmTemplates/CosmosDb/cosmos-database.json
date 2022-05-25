@@ -1,6 +1,6 @@
 {
     "contentVersion": "1.0.0.0",
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "parameters": {
         "accountName": {
             "type": "string",
@@ -12,7 +12,7 @@
             "type": "string",
             "metadata": {
                 "description": "Name of the database to create on the cosmosdb account"
-            }            
+            }
         },
         "useSharedRequestUnits": {
             "type": "bool",
@@ -38,7 +38,7 @@
     },
     "variables": {
         "DefaultDatabaseProperties": {
-            "resource":{
+            "resource": {
                 "id": "[parameters('databaseName')]"
             }
         },
@@ -51,25 +51,14 @@
                 }
             }
         ],
-        "DatabasePropertyOption": "[int(if(and(parameters('useSharedRequestUnits'), parameters('databaseNeedsCreation')), 1, 0))]",        
-        "DatabaseProperties": "[union(variables('DefaultDatabaseProperties'), variables('DatabaseThroughputCreationOption')[variables('DatabasePropertyOption')])]",
-        "VariableExplaination": [ 
-            "This variable contains comments about variables",
-            
-            "DatabasePropertyOption",
-            "This variables purpose is to determine which item from the DatabaseThroughputCreationOption variable to use given the parameters passed in.",
-            "This is an artifact of the azure resources - creating a cosmos database requires a object called 'options' on the resource properties, ",
-            "containing a 'throughput' property,  but it is set via a sub-resource at all other times.",
-
-            "DatabaseProperties",
-            "This variable contains the final database creation/update properties used by the template, and uses the DatabasePropertyOption to select the correct throughput options to use."
-        ]
+        "DatabasePropertyOption": "[int(if(and(parameters('useSharedRequestUnits'), parameters('databaseNeedsCreation')), 1, 0))]",
+        "DatabaseProperties": "[union(variables('DefaultDatabaseProperties'), variables('DatabaseThroughputCreationOption')[variables('DatabasePropertyOption')])]"
     },
     "resources": [
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/apis/databases",
             "name": "[concat(parameters('accountName'), '/sql/', parameters('databaseName'))]",
-            "apiVersion": "2016-03-31",
+            "apiVersion": "2015-04-08",
             "properties": "[variables('DatabaseProperties')]"
         },
         {
@@ -78,11 +67,11 @@
             "name": "[concat(parameters('accountName'), '/sql/', parameters('databaseName'), '/throughput')]",
             "apiVersion": "2016-03-31",
             "dependsOn": [ "[resourceId('Microsoft.DocumentDB/databaseAccounts/apis/databases', parameters('accountName'), 'sql', parameters('databaseName'))]" ],
-            "properties":{
-                "resource":{
+            "properties": {
+                "resource": {
                     "throughput": "[parameters('offerThroughput')]"
                 }
             }
         }
-    ]    
+    ]
 }

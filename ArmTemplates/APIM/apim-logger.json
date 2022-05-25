@@ -8,6 +8,10 @@
         "productDisplayName": {
             "type": "string",
             "defaultValue": ""
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {
@@ -17,10 +21,10 @@
     },
     "resources": [
         {
-            "apiVersion": "2015-05-01",
+            "apiVersion": "2020-02-02",
             "name": "[variables('appInsightsName')]",
             "type": "Microsoft.Insights/components",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "kind": "web",
             "properties": {
                 "Application_Type": "web"
@@ -29,27 +33,27 @@
         {
             "name": "[concat(parameters('apimServiceName'), '/', variables('apimLoggerName'))]",
             "type": "Microsoft.ApiManagement/service/loggers",
-            "apiVersion": "2018-01-01",
+            "apiVersion": "2021-08-01",
             "properties": {
-              "loggerType": "applicationInsights",
-              "credentials": {
-                  "instrumentationKey": "[reference(concat('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]"
-              },
-              "isBuffered": true
+                "loggerType": "applicationInsights",
+                "credentials": {
+                    "instrumentationKey": "[reference(concat('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]"
+                },
+                "isBuffered": true
             },
             "dependsOn": [
-              "[variables('appInsightsName')]"
+                "[variables('appInsightsName')]"
             ]
-          }
+        }
     ],
     "outputs": {
         "ApimLoggerName": {
             "type": "string",
-            "value": "[split(reference(resourceId(resourceGroup().name, 'Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2018-01-01', 'Full').resourceId, '/')[4]]"
+            "value": "[split(reference(resourceId(resourceGroup().name, 'Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2021-08-01', 'Full').resourceId, '/')[4]]"
         },
         "ApimLoggerResourceId": {
             "type": "string",
-            "value": "[reference(resourceId(resourceGroup().name, 'Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2018-01-01', 'Full').resourceId]"
+            "value": "[reference(resourceId(resourceGroup().name, 'Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2021-08-01', 'Full').resourceId]"
         }
     }
 }

@@ -102,7 +102,7 @@
     },
     "resources": [
         {
-            "name":  "[parameters('alertName')]",
+            "name": "[parameters('alertName')]",
             "type": "Microsoft.Insights/metricAlerts",
             "apiVersion": "2018-03-01",
             "location": "global",

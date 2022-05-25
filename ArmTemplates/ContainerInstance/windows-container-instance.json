@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "containerName": {
@@ -21,7 +21,7 @@
             "type": "int"
         },
         "memoryInGb": {
-            "type":"string"
+            "type": "string"
         },
         "environmentVariables": {
             "type": "secureObject",
@@ -41,6 +41,10 @@
                 "OnFailure"
             ],
             "defaultValue": "Never"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {
@@ -87,9 +91,6 @@
                 ]
             }
         },
-        "metadata": {
-            "comments": "The portsArray variable ensures a object is always available for the copy loops.  The output of these loops is unioned with other properties only if publicallyExposedPorts is not an empty array."
-        },
         "portsArray": "[if(empty(parameters('publicallyExposedPorts')), array(0), parameters('publicallyExposedPorts'))]",
         "portsObject": {
             "copy": [
@@ -101,7 +102,7 @@
                         "port": "[variables('portsArray')[copyIndex('ports')]]"
                     }
                 }
-            ]          
+            ]
         },
         "properties": "[if(empty(parameters('publicallyExposedPorts')), variables('baseProperties'), union(variables('baseProperties'), variables('ipAddressObject')))]"
     },
@@ -109,8 +110,8 @@
         {
             "name": "[parameters('containerName')]",
             "type": "Microsoft.ContainerInstance/containerGroups",
-            "apiVersion": "2018-10-01",
-            "location": "[resourceGroup().location]",
+            "apiVersion": "2021-10-01",
+            "location": "[parameters('location')]",
             "properties": "[variables('properties')]"
         }
     ],

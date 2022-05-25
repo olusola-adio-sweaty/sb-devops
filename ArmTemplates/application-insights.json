@@ -14,6 +14,10 @@
             "metadata": {
                 "description": "Name of the app service the resource monitors (tag only)"
             }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
         }
     },
     "variables": {
@@ -24,10 +28,10 @@
     },
     "resources": [
         {
-            "apiVersion": "2015-05-01",
+            "apiVersion": "2020-02-02-preview",
             "name": "[parameters('appInsightsName')]",
             "type": "Microsoft.Insights/components",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "kind": "web",
             "tags": "[if(equals(parameters('attachedService'),''), variables('withoutAttachedService'), variables('withAttachedService'))]",
             "properties": {
