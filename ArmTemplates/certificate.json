@@ -29,9 +29,8 @@
             }
         },
         "location": {
-            "type":"string",
-            "defaultValue": 
-                "resourceGroup().location"
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
         }
     },
     "variables": {
@@ -40,7 +39,7 @@
             "withServerFarmId": {
                 "keyVaultId": "[resourceId(parameters('keyVaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('keyVaultName'))]",
                 "keyVaultSecretName": "[parameters('keyVaultCertificateName')]",
-                "serverFarmId": "[parameters('serverFarmId')]"                
+                "serverFarmId": "[parameters('serverFarmId')]"
             },
             "withoutServerFarmId": {
                 "keyVaultId": "[resourceId(parameters('keyVaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('keyVaultName'))]",
@@ -53,7 +52,7 @@
             "type": "Microsoft.Web/certificates",
             "name": "[parameters('keyVaultCertificateName')]",
             "location": "[parameters('location')]",
-            "apiVersion": "2016-03-01",
+            "apiVersion": "2021-03-01",
             "properties": "[if(variables('includeServerFarmId'), variables('certificateResourceProperties').withServerFarmId, variables('certificateResourceProperties').withoutServerFarmId)]"
         }
     ],

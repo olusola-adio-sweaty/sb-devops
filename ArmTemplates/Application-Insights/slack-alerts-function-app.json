@@ -13,7 +13,7 @@
             "metadata": {
                 "description": "The connection string used by the function app for azure webjob storage"
             }
-        }, 
+        },
         "slackWebHookToken": {
             "type": "securestring",
             "metadata": {
@@ -27,9 +27,8 @@
             }
         },
         "location": {
-            "type":"string",
-            "defaultValue": 
-                "resourceGroup().location"
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
         }
     },
     "variables": {
@@ -41,7 +40,7 @@
         {
             "name": "[variables('hostingPlanName')]",
             "type": "Microsoft.Web/serverfarms",
-            "apiVersion": "2020-12-01",            
+            "apiVersion": "2020-12-01",
             "location": "[parameters('location')]",
             "properties": {
                 "name": "[variables('hostingPlanName')]",
@@ -111,7 +110,7 @@
                     ]
                 }
             }
-        }    
+        }
     ],
     "outputs": {
         "WebhookUrl": {

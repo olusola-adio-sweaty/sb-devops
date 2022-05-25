@@ -14,10 +14,10 @@
         "aseVNetResourceGroupName": {
             "type": "string"
         },
-    "location": {
-      "type": "string",
-      "defaultValue": "resourceGroup().location"
-    }
+        "location": {
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
+        }
     },
     "resources": [
         {

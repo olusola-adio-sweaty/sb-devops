@@ -20,9 +20,8 @@
             ]
         },
         "location": {
-            "type":"string",
-            "defaultValue": 
-                "resourceGroup().location"
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
         }
     },
     "variables": {},
@@ -30,7 +29,7 @@
         {
             "name": "[parameters('cdnProfileName')]",
             "type": "Microsoft.Cdn/profiles",
-            "apiVersion": "2016-04-02",
+            "apiVersion": "2021-06-01",
             "location": "[parameters('location')]",
             "tags": {},
             "sku": {

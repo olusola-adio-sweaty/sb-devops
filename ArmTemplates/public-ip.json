@@ -38,9 +38,8 @@
             }
         },
         "location": {
-            "type":"string",
-            "defaultValue": 
-                "resourceGroup().location"
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
         }
     },
     "variables": {
@@ -62,11 +61,11 @@
             "apiVersion": "2020-05-01",
             "type": "Microsoft.Network/publicIPAddresses",
             "location": "[parameters('location')]",
-            "sku":{
+            "sku": {
                 "name": "[parameters('ipAddressSku')]"
             },
             "properties": "[if(equals(length(parameters('publicDnsLabel')),0), variables('publicIPAddressProperties').withoutDnsLabel, variables('publicIPAddressProperties').withDnsLabel)]"
-        }       
+        }
     ],
     "outputs": {
         "publicIpAddressId": {

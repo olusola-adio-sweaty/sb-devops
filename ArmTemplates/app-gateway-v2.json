@@ -142,10 +142,10 @@
                 "description": "Number of days to retain the log files for (set to 0 to disable retention policy)"
             }
         },
-    "location": {
-      "type": "string",
-      "defaultValue": "resourceGroup().location"
-    }
+        "location": {
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
+        }
     },
     "variables": {
         "logDiagnosticEnabled": "[or(not(empty(parameters('logStorageAccountId'))),not(empty(parameters('logWorkspaceId'))))]",
@@ -273,11 +273,11 @@
                 "input": {
                     "name": "[parameters('backendPools')[copyIndex('backendAddressPools')].name]",
                     "properties": {
-                      "BackendAddresses": [
-                          {
-                            "fqdn": "[parameters('backendPools')[copyIndex('backendAddressPools')].fqdn]"
-                          }
-                      ]
+                        "BackendAddresses": [
+                            {
+                                "fqdn": "[parameters('backendPools')[copyIndex('backendAddressPools')].fqdn]"
+                            }
+                        ]
                     }
                 }
             },
@@ -394,7 +394,7 @@
                         "name": "[concat(parameters('appGatewayName'), '-diagnositics')]",
                         "storageAccountId": "[if(empty(parameters('logStorageAccountId')), json('null'), parameters('logStorageAccountId'))]",
                         "workspaceId": "[if(empty(parameters('logWorkspaceId')), json('null'), parameters('logWorkspaceId'))]",
-                        "logs": [ 
+                        "logs": [
                             {
                                 "category": "ApplicationGatewayAccessLog",
                                 "enabled": true,

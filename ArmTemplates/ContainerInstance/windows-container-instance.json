@@ -21,7 +21,7 @@
             "type": "int"
         },
         "memoryInGb": {
-            "type":"string"
+            "type": "string"
         },
         "environmentVariables": {
             "type": "secureObject",
@@ -43,9 +43,8 @@
             "defaultValue": "Never"
         },
         "location": {
-            "type":"string",
-            "defaultValue": 
-                "resourceGroup().location"
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
         }
     },
     "variables": {
@@ -103,7 +102,7 @@
                         "port": "[variables('portsArray')[copyIndex('ports')]]"
                     }
                 }
-            ]          
+            ]
         },
         "properties": "[if(empty(parameters('publicallyExposedPorts')), variables('baseProperties'), union(variables('baseProperties'), variables('ipAddressObject')))]"
     },

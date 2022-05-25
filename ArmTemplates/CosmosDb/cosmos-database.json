@@ -12,7 +12,7 @@
             "type": "string",
             "metadata": {
                 "description": "Name of the database to create on the cosmosdb account"
-            }            
+            }
         },
         "useSharedRequestUnits": {
             "type": "bool",
@@ -38,7 +38,7 @@
     },
     "variables": {
         "DefaultDatabaseProperties": {
-            "resource":{
+            "resource": {
                 "id": "[parameters('databaseName')]"
             }
         },
@@ -51,11 +51,11 @@
                 }
             }
         ],
-        "DatabasePropertyOption": "[int(if(and(parameters('useSharedRequestUnits'), parameters('databaseNeedsCreation')), 1, 0))]",        
+        "DatabasePropertyOption": "[int(if(and(parameters('useSharedRequestUnits'), parameters('databaseNeedsCreation')), 1, 0))]",
         "DatabaseProperties": "[union(variables('DefaultDatabaseProperties'), variables('DatabaseThroughputCreationOption')[variables('DatabasePropertyOption')])]",
-        "VariableExplaination": [ 
+        "VariableExplaination": [
             "This variable contains comments about variables",
-            
+
             "DatabasePropertyOption",
             "This variables purpose is to determine which item from the DatabaseThroughputCreationOption variable to use given the parameters passed in.",
             "This is an artifact of the azure resources - creating a cosmos database requires a object called 'options' on the resource properties, ",
@@ -78,11 +78,11 @@
             "name": "[concat(parameters('accountName'), '/sql/', parameters('databaseName'), '/throughput')]",
             "apiVersion": "2016-03-31",
             "dependsOn": [ "[resourceId('Microsoft.DocumentDB/databaseAccounts/apis/databases', parameters('accountName'), 'sql', parameters('databaseName'))]" ],
-            "properties":{
-                "resource":{
+            "properties": {
+                "resource": {
                     "throughput": "[parameters('offerThroughput')]"
                 }
             }
         }
-    ]    
+    ]
 }

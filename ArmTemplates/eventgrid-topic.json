@@ -8,10 +8,10 @@
         "eventgridTopicSku": {
             "type": "String"
         },
-    "location": {
-      "type": "string",
-      "defaultValue": "resourceGroup().location"
-    }
+        "location": {
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
+        }
     },
     "variables": {},
     "resources": [

@@ -10,9 +10,8 @@
             "defaultValue": ""
         },
         "location": {
-            "type":"string",
-            "defaultValue": 
-                "resourceGroup().location"
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
         }
     },
     "variables": {
@@ -36,16 +35,16 @@
             "type": "Microsoft.ApiManagement/service/loggers",
             "apiVersion": "2018-01-01",
             "properties": {
-              "loggerType": "applicationInsights",
-              "credentials": {
-                  "instrumentationKey": "[reference(concat('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]"
-              },
-              "isBuffered": true
+                "loggerType": "applicationInsights",
+                "credentials": {
+                    "instrumentationKey": "[reference(concat('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]"
+                },
+                "isBuffered": true
             },
             "dependsOn": [
-              "[variables('appInsightsName')]"
+                "[variables('appInsightsName')]"
             ]
-          }
+        }
     ],
     "outputs": {
         "ApimLoggerName": {

@@ -20,16 +20,16 @@
             "defaultValue": ""
         },
         "apiVersion": {
-            "type":"string",
+            "type": "string",
             "metadata": {
-              "description": "The version of the API, must be in the format v1, v2 ... v10, etc"
+                "description": "The version of the API, must be in the format v1, v2 ... v10, etc"
             },
             "defaultValue": ""
         },
         "apiSuffix": {
-            "type":"string",
+            "type": "string",
             "metadata": {
-              "description": "Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance, defaults to apiName"
+                "description": "Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance, defaults to apiName"
             },
             "defaultValue": ""
         },
@@ -88,14 +88,14 @@
         {
             "name": "[concat(parameters('apimServiceName'), '/', variables('apimApiVersionName'))]",
             "type": "Microsoft.ApiManagement/service/apis",
-            "apiVersion": "2018-01-01",
+            "apiVersion": "2019-01-01",
             "properties": "[if(equals(parameters('apiVersion'), ''), variables('apiProperties').noversion, variables('apiProperties').versioned)]",
             "resources": [
                 {
                     "name": "applicationinsights",
                     "type": "diagnostics",
                     "condition": "[greater(length(parameters('apimLoggerName')), 0)]",
-                    "apiVersion": "2018-01-01",
+                    "apiVersion": "2019-01-01",
                     "properties": {
                         "enabled": true,
                         "alwaysLog": "allErrors",
@@ -129,7 +129,7 @@
             "name": "[concat(parameters('apimServiceName'), '/', parameters('apimProductInstanceName'), '/', variables('apimApiVersionName'))]",
             "type": "Microsoft.ApiManagement/service/products/apis",
             "condition": "[not(equals(parameters('apimProductInstanceName'), ''))]",
-            "apiVersion": "2018-01-01",
+            "apiVersion": "2019-01-01",
             "dependsOn": [
                 "[concat('Microsoft.ApiManagement/service/', parameters('apimServiceName'), '/apis/', variables('apimApiVersionName'))]"
             ]

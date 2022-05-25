@@ -24,7 +24,7 @@
         },
         "addDevelopers": {
             "type": "bool",
-            "defaultValue":false,
+            "defaultValue": false,
             "metadata": {
                 "description": "Adds the built in Developers group to the Access Control list of the Product"
             }

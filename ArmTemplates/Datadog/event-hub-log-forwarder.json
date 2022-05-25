@@ -179,7 +179,6 @@
         "publicNetworkAccessForQuery": "Enabled"
       }
     }
-
   ],
   "outputs": {
     "eventHubNamespace": {

@@ -38,9 +38,9 @@
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2021-09-01",
             "properties": {
-              "publicAccess": "[parameters('publicAccess')]"
+                "publicAccess": "[parameters('publicAccess')]"
             }
-          }
+        }
     ],
     "outputs": {}
 }

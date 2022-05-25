@@ -8,7 +8,7 @@
                 "description": "The name of the Service Bus Namespace to ad the VNet rule to."
             }
         },
-        "subnetNames" :{
+        "subnetNames": {
             "type": "array",
             "metadata": {
                 "description": "An array of Subnet names to add to the VNet rule."
@@ -33,18 +33,20 @@
                 "description": "An array of IP Addresses."
             }
         },
-    "location": {
-      "type": "string",
-      "defaultValue": "resourceGroup().location"
-    }
+        "location": {
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
+        }
     },
     "variables": {
         "namespaceNetworkRuleSetName": "[concat(parameters('servicebusName'), concat('/', 'default'))]",
-        "copy": [{
-            "name": "subnetCopy",
-            "count": "[length(parameters('subnetNames'))]",
-            "input": "[concat(resourceId(parameters('vnetResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('vnetName')), '/subnets/', parameters('subnetNames')[copyIndex('subnetCopy')])]"
-        }]
+        "copy": [
+            {
+                "name": "subnetCopy",
+                "count": "[length(parameters('subnetNames'))]",
+                "input": "[concat(resourceId(parameters('vnetResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('vnetName')), '/subnets/', parameters('subnetNames')[copyIndex('subnetCopy')])]"
+            }
+        ]
     },
     "resources": [
         {
@@ -54,16 +56,18 @@
             "location": "[parameters('location')]",
             "tags": {},
             "properties": {
-                "copy": [{
-                    "name": "virtualNetworkRules",
-                    "count": "[length(variables('subnetCopy'))]",
-                    "input": {
-                        "subnet": {
-                            "id": "[variables('subnetCopy')[copyIndex('virtualNetworkRules')]]"
-                        },
-                        "ignoreMissingVnetServiceEndpoint": false
+                "copy": [
+                    {
+                        "name": "virtualNetworkRules",
+                        "count": "[length(variables('subnetCopy'))]",
+                        "input": {
+                            "subnet": {
+                                "id": "[variables('subnetCopy')[copyIndex('virtualNetworkRules')]]"
+                            },
+                            "ignoreMissingVnetServiceEndpoint": false
+                        }
                     }
-                }],
+                ],
                 "ipRules": "[parameters('ipRules')]",
                 "defaultAction": "Deny"
             }
