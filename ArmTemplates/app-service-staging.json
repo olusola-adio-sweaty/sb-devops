@@ -95,7 +95,7 @@
                     "name": "staging",
                     "type": "slots",
                     "apiVersion": "2020-12-01",
-                    "location": "[resourceGroup().location]",
+                    "location": "[parameters('location')]",
                     "properties": {
                         "clientAffinityEnabled": "[parameters('clientAffinity')]",
                         "siteConfig": {

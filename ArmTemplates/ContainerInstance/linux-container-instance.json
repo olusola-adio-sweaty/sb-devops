@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "containerName": {
@@ -161,7 +161,7 @@
             "dependsOn": [
                 "[variables('ManagedIdentityName')]"
             ],
-            "apiVersion": "2018-10-01",
+            "apiVersion": "2021-10-01",
             "location": "[parameters('location')]",
             "identity": "[variables('IdentityProperties')]",
             "properties": {
@@ -199,7 +199,7 @@
             "name": "[variables('ManagedIdentityName')]",
             "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
             "condition": "[parameters('managedIdentity')]",
-            "apiVersion": "2018-11-30",
+            "apiVersion": "2021-09-30-preview",
             "location": "[parameters('location')]",
             "properties": {
             }
