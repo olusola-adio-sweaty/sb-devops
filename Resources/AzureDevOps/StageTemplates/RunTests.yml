@@ -41,7 +41,7 @@ stages:
           templatelocation: '$(System.DefaultWorkingDirectory)\BicepModules'
           resultLocation: '$(System.DefaultWorkingDirectory)/BicepResults'
           includeTests: ''
-          skipTests: 'providers_apiVersions-Is-Not-Permitted'
+          skipTests: 'providers_apiVersions-Is-Not-Permitted,Outputs Must Not Contain Secrets'
           mainTemplates: ''
           allTemplatesMain: false
           cliOutputResults: true
