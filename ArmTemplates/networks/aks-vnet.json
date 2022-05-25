@@ -21,10 +21,10 @@
         "vnetName": {
             "type": "string"
         },
-    "location": {
-      "type": "string",
-      "defaultValue": "resourceGroup().location"
-    }
+        "location": {
+            "type": "string",
+            "defaultValue": "resourceGroup().location"
+        }
     },
     "variables": {
         "routeTable": {

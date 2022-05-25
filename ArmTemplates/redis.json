@@ -25,6 +25,10 @@
       "metadata": {
         "description": "The size of the new Azure Redis Cache instance"
       }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "resourceGroup().location"
     }
   },
   "variables": {
@@ -35,7 +39,7 @@
       "name": "[parameters('redisName')]",
       "type": "Microsoft.Cache/Redis",
       "apiVersion": "2015-08-01",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "properties": {
         "sku": {
           "name": "[parameters('redisSkuName')]",

@@ -149,7 +149,7 @@
                     "name": "activeDirectory",
                     "type": "administrators",
                     "apiVersion": "2014-04-01",
-                    "location": "[resourceGroup().location]",
+                    "location": "[parameters('location')]",
                     "dependsOn": [
                         "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'))]",
                         "[if(not(equals(parameters('elasticPoolName'), '')), concat('Microsoft.Sql/servers/', parameters('sqlServerName'), '/elasticPools/', parameters('elasticPoolName')) , concat('Microsoft.Sql/servers/', parameters('sqlServerName')))]"
@@ -166,7 +166,7 @@
                     "name": "[variables('elasticPoolName')]",
                     "type": "Microsoft.Sql/servers/elasticPools",
                     "apiVersion": "2014-04-01",
-                    "location": "[resourceGroup().location]",
+                    "location": "[parameters('location')]",
                     "condition": "[not(equals(parameters('elasticPoolName'), ''))]",
                     "dependsOn": [
                         "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'))]"

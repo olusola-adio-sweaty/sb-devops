@@ -32,7 +32,11 @@
             "metadata": {
                 "description": "An array of IP Addresses."
             }
-        }
+        },
+    "location": {
+      "type": "string",
+      "defaultValue": "resourceGroup().location"
+    }
     },
     "variables": {
         "namespaceNetworkRuleSetName": "[concat(parameters('servicebusName'), concat('/', 'default'))]",
@@ -47,7 +51,7 @@
             "type": "Microsoft.ServiceBus/namespaces/networkruleset",
             "name": "[variables('namespaceNetworkRuleSetName')]",
             "apiVersion": "2018-01-01-preview",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "tags": {},
             "properties": {
                 "copy": [{

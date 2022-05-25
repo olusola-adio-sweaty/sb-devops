@@ -141,7 +141,11 @@
             "metadata": {
                 "description": "Number of days to retain the log files for (set to 0 to disable retention policy)"
             }
-        }
+        },
+    "location": {
+      "type": "string",
+      "defaultValue": "resourceGroup().location"
+    }
     },
     "variables": {
         "logDiagnosticEnabled": "[or(not(empty(parameters('logStorageAccountId'))),not(empty(parameters('logWorkspaceId'))))]",
@@ -318,7 +322,7 @@
             "name": "[parameters('appGatewayName')]",
             "type": "Microsoft.Network/applicationGateways",
             "apiVersion": "2020-11-01",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "properties": {
                 "sku": {
                     "name": "[parameters('appGatewayTier')]",

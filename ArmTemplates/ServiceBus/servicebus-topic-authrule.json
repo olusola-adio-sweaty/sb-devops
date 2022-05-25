@@ -25,7 +25,11 @@
             "metadata": {
                 "description": "Name of Service Bus namespace the topic attached to"
             }
-        }
+        },
+    "location": {
+      "type": "string",
+      "defaultValue": "resourceGroup().location"
+    }
     },
     "variables": {},
     "resources": [
@@ -33,7 +37,7 @@
             "type": "Microsoft.ServiceBus/namespaces/topics/authorizationRules",
             "name": "[concat(parameters('servicebusName'),'/',parameters('topicName'), '/', parameters('authorizationRuleName'))]",
             "apiVersion": "2017-04-01",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "tags": {},
             "properties": {
                 "rights": "[parameters('rights')]"
