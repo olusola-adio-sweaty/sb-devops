@@ -1,5 +1,6 @@
-@description('Name of the keyvault')
+@description('Name of keyvault')
 param keyVaultName string
+
 @description('Name of the resourcegroup')
 param location string = resourceGroup().location
 
@@ -11,7 +12,7 @@ var keyVault = {
   tenantId: subscription().tenantId
 }
 
-resource kv 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
+resource kv 'Microsoft.KeyVault/vaults@2021-10-01' = {
   name: keyVault.name
   location: keyVault.location
   tags: {}
