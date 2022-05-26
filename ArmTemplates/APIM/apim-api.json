@@ -129,7 +129,7 @@
             "name": "[concat(parameters('apimServiceName'), '/', parameters('apimProductInstanceName'), '/', variables('apimApiVersionName'))]",
             "type": "Microsoft.ApiManagement/service/products/apis",
             "condition": "[not(equals(parameters('apimProductInstanceName'), ''))]",
-            "apiVersion": "2021-08-01",
+            "apiVersion": "2021-12-01-preview",
             "dependsOn": [
                 "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), variables('apimApiVersionName'))]"
             ]
