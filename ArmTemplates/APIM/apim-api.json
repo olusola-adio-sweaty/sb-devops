@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "apimServiceName": {
@@ -95,7 +95,7 @@
                     "name": "applicationinsights",
                     "type": "diagnostics",
                     "condition": "[greater(length(parameters('apimLoggerName')), 0)]",
-                    "apiVersion": "2021-04-01-preview",
+                    "apiVersion": "2021-12-01-preview",
                     "properties": {
                         "enabled": true,
                         "alwaysLog": "allErrors",
