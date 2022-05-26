@@ -36,7 +36,7 @@
         {
             "type": "Microsoft.KeyVault/vaults/accessPolicies",
             "name": "[concat(parameters('keyVaultName'), '/add')]",
-            "apiVersion": "2020-04-01-preview",
+            "apiVersion": "2021-11-01-preview",
             "properties": {
                 "accessPolicies": [
                     {
