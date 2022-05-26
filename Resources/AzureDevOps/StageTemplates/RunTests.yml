@@ -34,10 +34,8 @@ stages:
         condition: always()     
       
       - script: |
-          $Tests = (Get-ChildItem -Path '$(System.DefaultWorkingDirectory)\BicepModules' -Recurse | Where-Object {$_.Name -like "*.bicep"})
-          foreach ($fileItem in $Tests) {
-            # Copy-Item $fileItem.FullName "$($fileItem.DirectoryName)\$($fileItem.BaseName).json"
-            Write-Host '$fileItem.FullName'
+          $BicepFiles = (Get-ChildItem -Path '$(System.DefaultWorkingDirectory)\BicepModules' -Recurse | Where-Object {$_.Name -like "*.bicep"})
+          foreach ($fileItem in $BicepFiles) {
             az bicep build --file $fileItem.FullName
           }
 
