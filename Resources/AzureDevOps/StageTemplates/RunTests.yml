@@ -35,7 +35,7 @@ stages:
       
       - script: |
           az bicep build --file BicepModules/keyvault.bicep
-          $Tests = (Get-ChildItem -Path $($TestsPath) -Recurse | Where-Object {$_.Name -like "*.bicep"})
+          $Tests = (Get-ChildItem -Path '$(System.DefaultWorkingDirectory)\BicepModules' -Recurse | Where-Object {$_.Name -like "*.bicep"})
           foreach ($fileItem in $Tests) {
             # Copy-Item $fileItem.FullName "$($fileItem.DirectoryName)\$($fileItem.BaseName).json"
             az bicep build --file $fileItem.FullName
