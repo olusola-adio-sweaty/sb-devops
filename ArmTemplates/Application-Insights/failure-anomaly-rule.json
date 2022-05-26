@@ -29,13 +29,19 @@
                 "description": "The frequency the alert is processed in ISO 8601 duration format"
             }
         },
-        "resourceId": {
+        "appInsightName": {
+            "type": "string",
+            "metadata": {
+                "description": "The frequency the alert is processed in ISO 8601 duration format"
+            }
+        },
+        "actionGrpResourceGroupName": {
             "type": "string",
             "metadata": {
                 "description": "The resource id of the app insights instance to attach the rule to"
             }
         },
-        "actionGroupId": {
+        "actionGroupName": {
             "type": "string",
             "metadata": {
                 "description": "The action group to trigger when the alert is fired"
@@ -57,11 +63,11 @@
                     "id": "FailureAnomaliesDetector"
                 },
                 "scope": [
-                    "[parameters('resourceId')]"
+                    "[resourceId('Microsoft.Insights/Components', parameters('appInsightName'))]"
                 ],
                 "actionGroups": {
                     "groupIds": [
-                        "[parameters('actionGroupId')]"
+                        "[resourceId(parameters('actionGrpResourceGroupName'), 'microsoft.insights/actionGroups', parameters('actionGroupName'))]"
                     ]
                 }
             }
