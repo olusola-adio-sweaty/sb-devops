@@ -81,11 +81,11 @@
                 "type": "public",
                 "copy": [
                     {
-                        "name": "ports",
+                        "name": "ports1",
                         "count": "[length(variables('portsArray'))]",
                         "input": {
                             "protocol": "tcp",
-                            "port": "[variables('portsArray')[copyIndex('ports')]]"
+                            "port": "[variables('portsArray')[copyIndex('ports1')]]"
                         }
                     }
                 ]
@@ -95,11 +95,11 @@
         "portsObject": {
             "copy": [
                 {
-                    "name": "ports",
+                    "name": "ports2",
                     "count": "[length(variables('portsArray'))]",
                     "input": {
                         "protocol": "tcp",
-                        "port": "[variables('portsArray')[copyIndex('ports')]]"
+                        "port": "[variables('portsArray')[copyIndex('ports2')]]"
                     }
                 }
             ]
