@@ -46,7 +46,7 @@
         {
             "type": "Microsoft.AlertsManagement/smartdetectoralertrules",
             "location": "global",
-            "apiVersion": "2019-03-01",
+            "apiVersion": "2021-04-01",
             "name": "[concat('Failure Anomalies v2 - ', parameters('alertName'))]",
             "properties": {
                 "description": "Detects a spike in the failure rate of requests or dependencies",

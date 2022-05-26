@@ -1,4 +1,4 @@
-Describe "Key Vault Secrets Deployment Tests" -Tag "Acceptance" {
+Describe "Key Vault Secrets Deployment Tests" -Tag "DontRun" {
 
   BeforeAll {
     # common variables

@@ -84,7 +84,7 @@
     "eventHubTemplateLink": "https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/Datadog/event-hub.json",
     "functionAppTemplateLink": "https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/ArmTemplates/Datadog/function-app.json",
     "appInsights": "[concat('sb-', parameters('env'), '-api-datadog-ingest-ai')]",
-    "logAnalyticWorspace": "[concat('sb-', parameters('env'), '-api-datadog-la')]"
+    "logAnalyticWorkspace": "[concat('sb-', parameters('env'), '-api-datadog-la')]"
   },
   "resources": [
     {
@@ -173,19 +173,19 @@
         "Flow_Type": "Redfield",
         "Request_Source": "IbizaWebAppExtensionCreate",
         "RetentionInDays": 90,
-        "WorkspaceResourceId": "[resourceId('microsoft.operationalinsights/workspaces',variables('logAnalyticWorspace'))]",
+        "WorkspaceResourceId": "[resourceId('microsoft.operationalinsights/workspaces',variables('logAnalyticWorkspace'))]",
         "IngestionMode": "LogAnalytics",
         "publicNetworkAccessForIngestion": "Enabled",
         "publicNetworkAccessForQuery": "Enabled"
       },
       "dependsOn": [
-        "[resourceId('microsoft.operationalinsights/workspaces', variables('logAnalyticWorspace'))]"
+        "[resourceId('microsoft.operationalinsights/workspaces', variables('logAnalyticWorkspace'))]"
       ]
     },
     {
       "type": "microsoft.operationalinsights/workspaces",
       "apiVersion": "2021-12-01-preview",
-      "name": "[variables('logAnalyticWorspace')]",
+      "name": "[variables('logAnalyticWorkspace')]",
       "location": "[parameters('location')]",
       "properties": {
         "sku": {
