@@ -33,11 +33,15 @@ stages:
           testResultsFiles: '$(System.DefaultWorkingDirectory)\results\*-armttk.xml'
         condition: always()     
       
-      - script: |
-          $BicepFiles = (Get-ChildItem -Path '$(System.DefaultWorkingDirectory)\BicepModules' -Recurse | Where-Object {$_.Name -like "*.bicep"})
-          foreach ($fileItem in $BicepFiles) {
-            az bicep build --file $fileItem.FullName
-          }
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline' # Optional. Options: filePath, inline
+          script:  |
+            $BicepFiles = (Get-ChildItem -Path '$(System.DefaultWorkingDirectory)\BicepModules' -Recurse | Where-Object {$_.Name -like "*.bicep"})
+            foreach ($fileItem in $BicepFiles) {
+              az bicep build --file $fileItem.FullName
+            }
+          workingDirectory: '$(System.DefaultWorkingDirectory)\BicepModules'
 
       - task: RunARMTTKTests@1
         inputs:
