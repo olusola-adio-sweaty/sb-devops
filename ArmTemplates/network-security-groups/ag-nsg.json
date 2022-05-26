@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
@@ -37,7 +37,7 @@
     },
     "resources": [
         {
-            "apiVersion": "2017-06-01",
+            "apiVersion": "2021-08-01",
             "type": "Microsoft.Network/networkSecurityGroups",
             "name": "[parameters('name')]",
             "location": "[parameters('location')]",
@@ -69,7 +69,7 @@
                             "sourcePortRange": "*",
                             "protocol": "Tcp",
                             "destinationPortRange": "80",
-                            "destinationAddressPrefix": "[reference(resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('agSubnetName')), '2018-07-01', 'Full').properties.addressPrefix]"
+                            "destinationAddressPrefix": "[reference(resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('agSubnetName')), '2021-08-01', 'Full').properties.addressPrefix]"
                         }
                     },
                     {
@@ -84,7 +84,7 @@
                             "sourcePortRange": "*",
                             "protocol": "Tcp",
                             "destinationPortRange": "443",
-                            "destinationAddressPrefix": "[reference(resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('agSubnetName')), '2018-07-01', 'Full').properties.addressPrefix]"
+                            "destinationAddressPrefix": "[reference(resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('agSubnetName')), '2021-08-01', 'Full').properties.addressPrefix]"
                         }
                     },
                     {

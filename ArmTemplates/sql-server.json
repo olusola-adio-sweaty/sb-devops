@@ -169,7 +169,7 @@
                     "location": "[parameters('location')]",
                     "condition": "[not(equals(parameters('elasticPoolName'), ''))]",
                     "dependsOn": [
-                        "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
+                        "[resourceId('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
                     ],
                     "properties": {
                         "edition": "[parameters('elasticPoolEdition')]",

@@ -387,7 +387,7 @@
                     "name": "[concat('Microsoft.Insights/', parameters('appGatewayName'), '-ds')]",
                     "apiVersion": "2017-05-01-preview",
                     "dependsOn": [
-                        "[concat('Microsoft.Network/applicationGateways/',parameters('appGatewayName'))]"
+                        "[resourceId('Microsoft.Network/applicationGateways/',parameters('appGatewayName'))]"
                     ],
                     "condition": "[variables('logDiagnosticEnabled')]",
                     "properties": {

@@ -49,11 +49,11 @@
     "outputs": {
         "ApimLoggerName": {
             "type": "string",
-            "value": "[split(reference(resourceId(resourceGroup().name, 'Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2021-08-01', 'Full').resourceId, '/')[4]]"
+            "value": "[split(reference(resourceId('Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2021-08-01', 'Full').resourceId, '/')[4]]"
         },
         "ApimLoggerResourceId": {
             "type": "string",
-            "value": "[reference(resourceId(resourceGroup().name, 'Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2021-08-01', 'Full').resourceId]"
+            "value": "[reference(resourceId('Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2021-08-01', 'Full').resourceId]"
         }
     }
 }
