@@ -35,7 +35,7 @@ param location string = resourceGroup().location
 var appInsights = 'sb-${env}-api-datadog-ingest-ai'
 var logAnalyticWorkspace_var = 'sb-${env}-api-datadog-la'
 
-module eventHubTemplate './event-hub.bicep' /*TODO: replace with correct path to [variables('eventHubTemplateLink')]*/ = {
+module eventHubTemplate 'event-hub.bicep' /*TODO: replace with correct path to [variables('eventHubTemplateLink')]*/ = {
   name: 'eventHubTemplate'
   params: {
     eventHubNamespace: eventHubNamespace
@@ -45,7 +45,7 @@ module eventHubTemplate './event-hub.bicep' /*TODO: replace with correct path to
   }
 }
 
-module functionAppTemplate './function-app.bicep' /*TODO: replace with correct path to [variables('functionAppTemplateLink')]*/ = {
+module functionAppTemplate 'function-app.bicep' /*TODO: replace with correct path to [variables('functionAppTemplateLink')]*/ = {
   name: 'functionAppTemplate'
   params: {
     eventhubNamespace: eventHubNamespace
