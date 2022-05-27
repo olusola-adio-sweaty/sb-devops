@@ -15,10 +15,12 @@ stages:
         ResultsFileSuffix: 'Acceptance'
 
     - job: RunArmTemplateTests
+      displayName: 'Run Arm/Bicep Template Tests'
       workspace:
         clean: all
       steps:
       - task: RunARMTTKTests@1
+        displayName: RunArmTemplateTests
         inputs:
           templatelocation: '$(System.DefaultWorkingDirectory)\ArmTemplates'
           resultLocation: '$(System.DefaultWorkingDirectory)/results'
@@ -48,6 +50,7 @@ stages:
           workingDirectory: '$(System.DefaultWorkingDirectory)\BicepModules'
 
       - task: RunARMTTKTests@1
+        displayName: RunBicepTemplateTests
         inputs:
           templatelocation: '$(System.DefaultWorkingDirectory)\BicepModules'
           resultLocation: '$(System.DefaultWorkingDirectory)/BicepResults'
