@@ -16,7 +16,7 @@ stages:
 
     - job: RunArmTemplateTests
       workspace:
-        clean all
+        clean: all
       steps:
       - task: RunARMTTKTests@1
         inputs:
