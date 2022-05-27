@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "appInsightsName": {
@@ -28,7 +28,7 @@
     },
     "resources": [
         {
-            "apiVersion": "2020-02-02-preview",
+            "apiVersion": "2020-02-02",
             "name": "[parameters('appInsightsName')]",
             "type": "Microsoft.Insights/components",
             "location": "[parameters('location')]",
@@ -42,11 +42,11 @@
     "outputs": {
         "InstrumentationKey": {
             "type": "string",
-            "value": "[reference(concat('microsoft.insights/components/', parameters('appInsightsName'))).InstrumentationKey]"
+            "value": "[reference(resourceId('microsoft.insights/components/', parameters('appInsightsName'))).InstrumentationKey]"
         },
         "AppId": {
             "type": "string",
-            "value": "[reference(concat('microsoft.insights/components/', parameters('appInsightsName'))).AppId]"
+            "value": "[reference(resourceId('microsoft.insights/components/', parameters('appInsightsName'))).AppId]"
         }
     }
 }

@@ -1,5 +1,5 @@
 {
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "cdnProfileName": {
@@ -172,12 +172,12 @@
         {
             "name": "[variables('fullEndpointName')]",
             "type": "Microsoft.Cdn/profiles/endpoints",
-            "apiVersion": "2016-04-02",
+            "apiVersion": "2021-06-01",
             "location": "[parameters('location')]",
             "properties": "[if(equals(parameters('originPath'), ''), variables('endpointProperties').withoutOriginPath, variables('endpointProperties').withOriginPath)]"
         },
         {
-            "apiVersion": "2016-04-02",
+            "apiVersion": "2021-06-01",
             "condition": "[variables('customDomainEnabled')]",
             "type": "Microsoft.Cdn/profiles/endpoints/customDomains",
             "name": "[concat(variables('fullEndpointName'), '/', if(variables('customDomainEnabled'), replace(parameters('customDomainName'), '.', '-'), 'placeholder'))]",

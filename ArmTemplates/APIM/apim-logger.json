@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "apimServiceName": {
@@ -37,7 +37,7 @@
             "properties": {
                 "loggerType": "applicationInsights",
                 "credentials": {
-                    "instrumentationKey": "[reference(concat('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]"
+                    "instrumentationKey": "[reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]"
                 },
                 "isBuffered": true
             },
@@ -49,11 +49,11 @@
     "outputs": {
         "ApimLoggerName": {
             "type": "string",
-            "value": "[split(reference(resourceId(resourceGroup().name, 'Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2021-08-01', 'Full').resourceId, '/')[4]]"
+            "value": "[split(reference(resourceId('Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2021-08-01', 'Full').resourceId, '/')[4]]"
         },
         "ApimLoggerResourceId": {
             "type": "string",
-            "value": "[reference(resourceId(resourceGroup().name, 'Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2021-08-01', 'Full').resourceId]"
+            "value": "[reference(resourceId('Microsoft.ApiManagement/service/loggers', parameters('apimServiceName'), variables('apimLoggerName')), '2021-08-01', 'Full').resourceId]"
         }
     }
 }

@@ -10,7 +10,7 @@
         },
         "location": {
             "type": "string",
-            "defaultValue": "West Europe"
+            "defaultValue": "[resourceGroup().location]"
         },
         "networkSecurityGroupAssigned": {
             "type": "bool"

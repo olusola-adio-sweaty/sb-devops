@@ -209,7 +209,7 @@
         "ManagedIdentityObjectId": {
             "type": "string",
             "condition": "[parameters('managedIdentity')]",
-            "value": "[reference(concat('Microsoft.ManagedIdentity/userAssignedIdentities/', variables('ManagedIdentityName')), '2018-11-30').principalId]"
+            "value": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', variables('ManagedIdentityName')), '2021-09-30').principalId]"
         }
     }
 }

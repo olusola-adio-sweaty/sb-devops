@@ -28,7 +28,7 @@
   },
   "resources": [
     {
-      "apiVersion": "2018-01-01-preview",
+      "apiVersion": "2021-11-01",
       "name": "[parameters('eventHubNamespace')]",
       "type": "Microsoft.EventHub/namespaces",
       "location": "[parameters('location')]",
@@ -46,7 +46,7 @@
     {
       "name": "[concat(parameters('eventHubNamespace'), '/', parameters('eventHubName'),'-', copyIndex(1))]",
       "type": "Microsoft.EventHub/namespaces/eventhubs",
-      "apiVersion": "2017-04-01",
+      "apiVersion": "2021-11-01",
       "copy": {
         "name": "nsg-loop",
         "count": "[parameters('copies')]"
@@ -59,7 +59,7 @@
     {
       "name": "[concat(parameters('eventHubNamespace'), '/DatadogRule-', copyIndex(1))]",
       "type": "Microsoft.EventHub/namespaces/authorizationRules",
-      "apiVersion": "2017-04-01",
+      "apiVersion": "2021-11-01",
       "copy": {
         "name": "nsg-loop",
         "count": "[parameters('copies')]"

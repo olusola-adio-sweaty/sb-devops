@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "apimServiceName": {
@@ -19,7 +19,7 @@
             "type": "string",
             "defaultValue": ""
         },
-        "apiVersion": {
+        "apimVersion": {
             "type": "string",
             "metadata": {
                 "description": "The version of the API, must be in the format v1, v2 ... v10, etc"
@@ -49,7 +49,7 @@
         }
     },
     "variables": {
-        "apimApiVersionName": "[if(equals(parameters('apiVersion'), ''), parameters('apiName'), concat(parameters('apiName'), '-', parameters('apiVersion')))]",
+        "apimApiVersionName": "[if(equals(parameters('apimVersion'), ''), parameters('apiName'), concat(parameters('apiName'), '-', parameters('apimVersion')))]",
         "apiSuffixPath": "[if(equals(parameters('apiSuffix'), ''), parameters('apiName'), parameters('apiSuffix'))]",
         "apiProperties": {
             "noversion": {
@@ -61,7 +61,7 @@
                 ]
             },
             "versioned": {
-                "apiVersion": "[parameters('apiVersion')]",
+                "apiVersion": "[parameters('apimVersion')]",
                 "apiVersionSetId": "[resourceId('Microsoft.ApiManagement/service/api-version-sets', parameters('apimServiceName'), variables('versionSetName'))]",
                 "authenticationSettings": "[variables('authenticationProvider')]",
                 "displayName": "[variables('apimApiVersionName')]",
@@ -89,13 +89,13 @@
             "name": "[concat(parameters('apimServiceName'), '/', variables('apimApiVersionName'))]",
             "type": "Microsoft.ApiManagement/service/apis",
             "apiVersion": "2021-08-01",
-            "properties": "[if(equals(parameters('apiVersion'), ''), variables('apiProperties').noversion, variables('apiProperties').versioned)]",
+            "properties": "[if(equals(parameters('apimVersion'), ''), variables('apiProperties').noversion, variables('apiProperties').versioned)]",
             "resources": [
                 {
                     "name": "applicationinsights",
                     "type": "diagnostics",
                     "condition": "[greater(length(parameters('apimLoggerName')), 0)]",
-                    "apiVersion": "2021-04-01-preview",
+                    "apiVersion": "2021-12-01-preview",
                     "properties": {
                         "enabled": true,
                         "alwaysLog": "allErrors",
@@ -129,7 +129,7 @@
             "name": "[concat(parameters('apimServiceName'), '/', parameters('apimProductInstanceName'), '/', variables('apimApiVersionName'))]",
             "type": "Microsoft.ApiManagement/service/products/apis",
             "condition": "[not(equals(parameters('apimProductInstanceName'), ''))]",
-            "apiVersion": "2021-08-01",
+            "apiVersion": "2021-12-01-preview",
             "dependsOn": [
                 "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), variables('apimApiVersionName'))]"
             ]

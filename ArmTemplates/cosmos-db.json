@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "cosmosDbName": {
@@ -95,7 +95,7 @@
         {
             "name": "[parameters('cosmosDbName')]",
             "type": "Microsoft.DocumentDB/databaseAccounts",
-            "apiVersion": "2015-04-08",
+            "apiVersion": "2022-02-15-preview",
             "location": "[parameters('location')]",
             "kind": "[if(equals(parameters('cosmosApiType'), 'MongoDB'), 'MongoDB', 'GlobalDocumentDB')]",
             "properties": "[if(equals(parameters('additionalIpAddresses'), ''), variables('cosmosResourceProperties').WithoutIpFilter, variables('cosmosResourceProperties').WithIpFilter)]",
@@ -107,7 +107,7 @@
     "outputs": {
         "PrimaryMasterKey": {
             "type": "string",
-            "value": "[listKeys(resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDbName')), '2015-04-08').primaryMasterKey]"
+            "value": "[listKeys(resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDbName')), '2022-02-15-preview').primaryMasterKey]"
         }
     }
 }
