@@ -1,0 +1,37 @@
+parameters:
+  BicepTemplateRoot: ''
+  SolutionBaseName: ''
+  AzureSubscription: 'sb(318061ea-2105-42da-82d9-b65e8e31017f)'
+  TestBicepTemplateScriptUrl: https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/PSScripts/Test-BicepTemplate.ps1
+  TestBicepTemplateScriptFilePath: $(System.DefaultWorkingDirectory)\Test-BicepTemplate.ps1
+  TokenizeTestParameters: false
+
+steps:
+- task: Tokenization@2
+  condition: ${{ parameters.TokenizeTestParameters }}
+  displayName: 'Tokenization: Transform file test-parameters.json'
+  inputs:
+    SourcePath: '${{ parameters.BicepTemplateRoot }}'
+    TargetFileNames: test-parameters.json
+
+- task: PowerShell@2
+  name: DownloadTestArmTemplateScript
+  displayName: 'Download Test-BicepTemplate script'
+  inputs:
+    targetType: 'inline'
+    script: Invoke-WebRequest -Uri ${{ parameters.TestBicepTemplateScriptUrl }} -OutFile ${{ parameters.TestBicepTemplateScriptFilePath }}
+
+- task: AzurePowerShell@3
+  displayName: 'Test Bicep Template'
+  inputs:
+    azureSubscription: ${{ parameters.AzureSubscription }}
+    scriptType: filePath
+    scriptPath: ${{ parameters.TestBicepTemplateScriptFilePath }}
+    scriptArguments: -ParameterFile '${{ parameters.BicepTemplateRoot }}\test-parameters.json' -TemplateFile '${{ parameters.BicepTemplateRoot }}\template.bicep' -Verbose
+    azurePowerShellVersion: LatestVersion
+    
+- task: PublishPipelineArtifact@0
+  displayName: Publish Pipeline Artifact
+  inputs:
+    targetPath: ${{ parameters.BicepTemplateRoot }}
+    artifactName: ${{ parameters.SolutionBaseName }}.Resources.BicepTemplates
