@@ -21,14 +21,13 @@ steps:
     targetType: 'inline'
     script: Invoke-WebRequest -Uri ${{ parameters.TestBicepTemplateScriptUrl }} -OutFile ${{ parameters.TestBicepTemplateScriptFilePath }}
 
-- task: AzurePowerShell@3
+- task: AzureCLI@2
   displayName: 'Test Bicep Template'
   inputs:
     azureSubscription: ${{ parameters.AzureSubscription }}
-    scriptType: filePath
+    scriptType: ps
     scriptPath: ${{ parameters.TestBicepTemplateScriptFilePath }}
-    scriptArguments: -ParameterFile '${{ parameters.BicepTemplateRoot }}\test-parameters.json' -TemplateFile '${{ parameters.BicepTemplateRoot }}\template.bicep' -Verbose
-    azurePowerShellVersion: LatestVersion
+    arguments: -ParameterFile '${{ parameters.BicepTemplateRoot }}\test-parameters.json' -TemplateFile '${{ parameters.BicepTemplateRoot }}\template.bicep' -Verbose
     
 - task: PublishPipelineArtifact@0
   displayName: Publish Pipeline Artifact

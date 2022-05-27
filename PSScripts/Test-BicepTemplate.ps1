@@ -40,10 +40,5 @@ if ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) {
     $DeploymentParameters
 
 }
-$Result = Test-AzureRmResourceGroupDeployment @DeploymentParameters
-if ($Result.Count -gt 0) {
 
-    $Result
-    throw "Template is invalid"
-
-}
+az deployment group validate --resource-group $ResourceGroupName --template-file $TemplateFile --parameters @($ParameterFile)
