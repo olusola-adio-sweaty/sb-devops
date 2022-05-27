@@ -15,6 +15,8 @@ stages:
         ResultsFileSuffix: 'Acceptance'
 
     - job: RunArmTemplateTests
+      workspace:
+        clean all
       steps:
       - task: RunARMTTKTests@1
         inputs:
@@ -39,7 +41,7 @@ stages:
           script:  |
             $BicepFiles = (Get-ChildItem -Path '$(System.DefaultWorkingDirectory)\BicepModules' -Recurse | Where-Object {$_.Name -like "*.bicep"})
             foreach ($fileItem in $BicepFiles) {
-              Write-Host "Changing '$fileItem.FullName' to json"
+              Write-Host "Changing '$(fileItem.FullName)' to json"
               az bicep build --file $fileItem.FullName
             }
           workingDirectory: '$(System.DefaultWorkingDirectory)\BicepModules'
