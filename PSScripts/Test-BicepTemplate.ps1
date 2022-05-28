@@ -40,5 +40,4 @@ if ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) {
     $DeploymentParameters
 
 }
-
 az deployment group validate --resource-group $ResourceGroupName --template-file $TemplateFile --parameters @($ParameterFile)
