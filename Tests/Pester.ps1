@@ -77,6 +77,13 @@ if ($Publish) {
 # Write-Host "Fetching tests:"
 $Tests = (Get-ChildItem -Path $($TestsPath) -Recurse | Where-Object {$_.Name -like "*.Tests.ps1"}).FullName
 
+# Write-Host "Fetching tests:"
+$Tests = (Get-ChildItem -Path $($TestsPath) -Recurse | Where-Object {$_.Name -like "*.json"})
+foreach ($fileItem in $Tests) {
+    # Copy-Item $fileItem.FullName "$($fileItem.DirectoryName)\$($fileItem.BaseName).json"
+    az bicep decompile --file $fileItem.FullName
+}
+
 $Powershellfiles = (Get-ChildItem -Recurse | Where-Object {$_.Name -like "*.psm1" -or $_.Name -like "*.ps1" -and $_.FullName -notlike "*\tests\*"}).FullName
 Write-Host "Powershell files count $($Powershellfiles.Count)"
 

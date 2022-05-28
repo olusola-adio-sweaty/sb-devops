@@ -72,7 +72,8 @@
             "name": "[concat(parameters('accountName'), '/sql/', parameters('databaseName'), '/', parameters('collectionName'))]",
             "apiVersion": "2016-03-31",
             "properties": {
-                "resource": "[variables('fullResourceProperties')]"
+                "resource": "[variables('fullResourceProperties')]",
+                "options": {}
             }
         },
         {
