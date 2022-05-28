@@ -1,0 +1,56 @@
+# This template includes a tokenisation step.  
+# In addition to the passing in the parameters listed below you will need to ensure that the variables that are tokenised are scoped to the stage or job calling this step template.
+
+parameters:
+  Location: 'West Europe'
+  BicepTemplateRoot: ''
+  AzureSubscription: ''
+  EnvironmentTag: ''
+  ParentBusinessTag: ''
+  ResourceGroup: ''
+  ServiceOfferingTag: ''
+  SetTagsScriptUrl: 'https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/PSScripts/Set-EsfaResourceGroupTags.ps1'
+  SetTagsScriptFilePath: '$(System.DefaultWorkingDirectory)\Set-EsfaResourceGroupTags.ps1'
+  DeployBicepTemplateScriptUrl: https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/PSScripts/Deploy-BicepTemplates.ps1
+  DeployBicepTemplateScriptFilePath: $(System.DefaultWorkingDirectory)\Test-BicepTemplates.ps1
+  ArmOutputVariableName: 'ARMOutputs'
+
+steps:
+- task: Tokenization@2
+  displayName: 'Tokenization: Transform file parameters.json'
+  inputs:
+    SourcePath: ${{ parameters.BicepTemplateRoot }}
+    TargetFileNames: parameters.json
+- task: PowerShell@2
+  name: DownloadSetEsfaResourceGroupTagsScript
+  displayName: 'Download Set-EsfaResourceGroupTags script'
+  inputs:
+    targetType: 'inline'
+    script: Invoke-WebRequest -Uri ${{ parameters.SetTagsScriptUrl }} -OutFile ${{ parameters.SetTagsScriptFilePath }}
+- task: AzurePowerShell@3
+  displayName: 'Tagging Resource Group ${{ parameters.ResourceGroup }}'
+  inputs:
+    azureSubscription: ${{ parameters.AzureSubscription }}
+    scriptType: filePath
+    ScriptPath: ${{ parameters.SetTagsScriptFilePath }}
+    ScriptArguments: '-ResourceGroupName ${{ parameters.ResourceGroup }}  -Location "${{  parameters.Location  }}" -Environment "${{ parameters.EnvironmentTag }}" -ParentBusiness "${{ parameters.ParentBusinessTag }}" -ServiceOffering "${{ parameters.ServiceOfferingTag }}" -Verbose'
+    azurePowerShellVersion: LatestVersion
+- task: PowerShell@2
+  name: DownloadTestArmTemplateScript
+  displayName: 'Download Deploy-BicepTemplate script'
+  inputs:
+    targetType: 'inline'
+    script: Invoke-WebRequest -Uri ${{ parameters.DeployBicepTemplateScriptUrl }} -OutFile ${{ parameters.DeployBicepTemplateScriptFilePath }}
+- task: AzureCLI@2
+  displayName: 'Deploying Bicep Template'
+  inputs:
+    azureSubscription: ${{ parameters.AzureSubscription }}
+    scriptType: ps
+    scriptPath: ${{ parameters.DeployBicepTemplateScriptFilePath }}
+    arguments: -ResourceGroupName '${{ parameters.ResourceGroup }}' -ParameterFile '${{ parameters.BicepTemplateRoot }}\parameters.json' -TemplateFile '${{ parameters.BicepTemplateRoot }}\template.bicep' -Verbose
+- task: DeleteFiles@1
+  displayName: 'Delete tokenised parameters.json file'
+  inputs:
+    SourceFolder: ${{ parameters.BicepTemplateRoot }}
+    Contents: parameters.json
+  condition: always()
