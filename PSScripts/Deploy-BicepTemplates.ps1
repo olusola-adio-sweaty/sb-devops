@@ -41,7 +41,7 @@ if ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) {
 
 }
 
-$current_date = Get-Date -Format "yyyy-MM-dd HH:mm"
-$template_name = "Template $($current_date)"
+$current_date = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+$template_name = "Template_$($current_date)"
 
 az deployment group create --name $template_name --resource-group $ResourceGroupName --template-file $TemplateFile --parameters @($ParameterFile)
