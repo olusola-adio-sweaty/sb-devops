@@ -14,6 +14,7 @@ parameters:
   DeployBicepTemplateScriptUrl: https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/PSScripts/Deploy-BicepTemplates.ps1
   DeployBicepTemplateScriptFilePath: $(System.DefaultWorkingDirectory)\Test-BicepTemplates.ps1
   ArmOutputVariableName: 'ARMOutputs'
+  BuildNumber: ''
 
 steps:
 - task: Tokenization@2
@@ -47,7 +48,7 @@ steps:
     azureSubscription: ${{ parameters.AzureSubscription }}
     scriptType: ps
     scriptPath: ${{ parameters.DeployBicepTemplateScriptFilePath }}
-    arguments: -ResourceGroupName '${{ parameters.ResourceGroup }}' -ParameterFile '${{ parameters.BicepTemplateRoot }}\parameters.json' -TemplateFile '${{ parameters.BicepTemplateRoot }}\template.bicep' -Verbose
+    arguments: -ResourceGroupName '${{ parameters.ResourceGroup }}' -ParameterFile '${{ parameters.BicepTemplateRoot }}\parameters.json' -TemplateFile '${{ parameters.BicepTemplateRoot }}\template.bicep' -BuildNUmber '${{ parameters.BuildNumber }}' -Verbose
 - task: DeleteFiles@1
   displayName: 'Delete tokenised parameters.json file'
   inputs:
