@@ -27,7 +27,7 @@ Param(
     [string] $ParameterFile,
     [string] $TemplateFile,
     [string] $ResourceGroupName = "sb-test-template-rg",
-    [string] $BuildNumber = ""
+    [string] $BuildNumber = "BuildNumber"
 )
 
 $DeploymentParameters = @{
