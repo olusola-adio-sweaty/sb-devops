@@ -41,4 +41,7 @@ if ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) {
 
 }
 
-az deployment group create --resource-group $ResourceGroupName --template-file $TemplateFile --parameters @($ParameterFile)
+$current_date = Get-Date -Format "yyyy-MM-dd HH:mm"
+$template_name = "Template $($current_date)"
+
+az deployment group create --name $template_name --resource-group $ResourceGroupName --template-file $TemplateFile --parameters @($ParameterFile)
