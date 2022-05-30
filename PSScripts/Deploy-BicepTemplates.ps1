@@ -30,11 +30,16 @@ Param(
     [string] $BuildNumber = "BuildNumber"
 )
 
+
+$current_date = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+$template_name = "Template_$($BuildNumber)_$($current_date)"
+
 $DeploymentParameters = @{
     ResourceGroupName     = $ResourceGroupName
     TemplateFile          = $TemplateFile
     TemplateParameterFile = $ParameterFile
-    Verbose               = $true
+    TemplateName          = $template_name
+    Verbose               = $true   
 }
 
 Write-Host "- Creating Deployment template"
@@ -45,7 +50,5 @@ if ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) {
 
 }
 
-$current_date = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-$template_name = "Template_$($BuildNumber)_$($current_date)"
 
 az deployment group create --name $template_name --resource-group $ResourceGroupName --template-file $TemplateFile --parameters @($ParameterFile)
