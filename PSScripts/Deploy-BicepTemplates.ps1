@@ -31,8 +31,7 @@ Param(
 )
 
 
-$current_date = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-$template_name = "Template_$($BuildNumber)_$($current_date)"
+$template_name = "Template_$($BuildNumber)"
 
 $DeploymentParameters = @{
     ResourceGroupName     = $ResourceGroupName
