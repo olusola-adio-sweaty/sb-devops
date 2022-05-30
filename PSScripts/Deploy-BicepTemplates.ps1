@@ -39,7 +39,7 @@ $DeploymentParameters = @{
     TemplateFile          = $TemplateFile
     TemplateParameterFile = $ParameterFile
     TemplateName          = $template_name
-    Verbose               = $true   
+    Verbose               = $true
 }
 
 Write-Host "- Creating Deployment template"
