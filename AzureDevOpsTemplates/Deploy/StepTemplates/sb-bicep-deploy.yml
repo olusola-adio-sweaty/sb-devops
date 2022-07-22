@@ -23,7 +23,6 @@ steps:
     SourcePath: ${{ parameters.BicepTemplateRoot }}
     TargetFileNames: parameters.json
 - task: PowerShell@2
-  name: DownloadSetEsfaResourceGroupTagsScript
   displayName: 'Download Set-EsfaResourceGroupTags script'
   inputs:
     targetType: 'inline'
@@ -37,7 +36,6 @@ steps:
     ScriptArguments: '-ResourceGroupName ${{ parameters.ResourceGroup }}  -Location "${{  parameters.Location  }}" -Environment "${{ parameters.EnvironmentTag }}" -ParentBusiness "${{ parameters.ParentBusinessTag }}" -ServiceOffering "${{ parameters.ServiceOfferingTag }}" -Verbose'
     azurePowerShellVersion: LatestVersion
 - task: PowerShell@2
-  name: DownloadTestArmTemplateScript
   displayName: 'Download Deploy-BicepTemplate script'
   inputs:
     targetType: 'inline'
