@@ -43,7 +43,7 @@ Q001.Powershell.Help.Tests.ps1
 # }
 
 BeforeDiscovery {
-    $Scripts = Get-ChildItem -Path $PSScriptRoot\..\*.ps1 -File -Recurse
+    $Scripts = Get-ChildItem -Path $PSScriptRoot\..\*.ps1 -File -Recurse | Where-Object {$_.FullName -notlike "*.Tests.ps1" -and $_.FullName -notlike "*Pester.ps1"}
     Write-Host "File count discovered for Help quality Tests: $($Scripts.Count)"
 }
 Describe "Help quality tests for '<_>'" -ForEach @($Scripts) -Tag "Quality" {

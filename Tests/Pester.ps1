@@ -77,7 +77,7 @@ if ($Publish) {
 # Write-Host "Fetching tests:"
 $Tests = (Get-ChildItem -Path $($TestsPath) -Recurse | Where-Object {$_.Name -like "*.Tests.ps1"}).FullName
 
-$Powershellfiles = (Get-ChildItem -Recurse | Where-Object {$_.Name -like "*.psm1" -or $_.Name -like "*.ps1" -and $_.FullName -notlike "*\tests\*"}).FullName
+$Powershellfiles = (Get-ChildItem -Recurse | Where-Object {$_.Name -like "*.psm1" -or $_.Name -like "*.ps1" -and $_.FullName -notlike "*.Tests.ps1" -and $_.FullName -notlike "*Pester.ps1"}).FullName
 Write-Host "Powershell files count $($Powershellfiles.Count)"
 
 $Params = [ordered]@{
