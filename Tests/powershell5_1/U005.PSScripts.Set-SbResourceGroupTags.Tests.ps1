@@ -10,6 +10,7 @@ Describe "Set-SbResourceGroupTags unit tests" -Tag "Unit" {
                 Tags              = @{  "env" = "test"; 
                                         "org" = "sb"; 
                                         "team" = "app"; 
+                                        'ResourceType' = "rg"
                                         "CostCenter" = "10001"; 
                                         "instance" = "dpp" 
                                     } 
