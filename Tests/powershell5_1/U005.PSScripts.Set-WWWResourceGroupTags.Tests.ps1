@@ -1,6 +1,6 @@
 Push-Location -Path $PSScriptRoot\..\..\PSScripts\
 
-Describe "Set-SbResourceGroupTags unit tests" -Tag "Unit" {
+Describe "Set-WWWResourceGroupTags unit tests" -Tag "Unit" {
 
     BeforeAll {
         Mock Get-AzureRmResourceGroup { [PsCustomObject]
@@ -22,7 +22,7 @@ Describe "Set-SbResourceGroupTags unit tests" -Tag "Unit" {
     }
     It "Should do nothing if a resource group exists with matching tags" {
 
-        .\Set-SbResourceGroupTags -ResourceGroupName "sb-foobar-rg" -env "test" -org "sb" -team "app" -CostCenter "10001" -instance "dpp"
+        .\Set-WWWResourceGroupTags -ResourceGroupName "sb-foobar-rg" -env "test" -org "sb" -team "app" -CostCenter "10001" -instance "dpp"
 
         Should -Invoke -CommandName Get-AzureRmResourceGroup -Exactly 1 -Scope It
         Should -Invoke -CommandName New-AzureRmResourceGroup -Exactly 0 -Scope It
@@ -32,7 +32,7 @@ Describe "Set-SbResourceGroupTags unit tests" -Tag "Unit" {
 
     It "Should update existing resource group if group exists with different tags" {
 
-        .\Set-SbResourceGroupTags -ResourceGroupName "sb-foobar-rg" -env "prod" -org "sb" -team "app" -CostCenter "10001" -instance "dpp"
+        .\Set-WWWResourceGroupTags -ResourceGroupName "sb-foobar-rg" -env "prod" -org "sb" -team "app" -CostCenter "10001" -instance "dpp"
 
         Should -Invoke -CommandName Get-AzureRmResourceGroup -Exactly 1 -Scope It
         Should -Invoke -CommandName New-AzureRmResourceGroup -Exactly 0 -Scope It
@@ -44,7 +44,7 @@ Describe "Set-SbResourceGroupTags unit tests" -Tag "Unit" {
 
         Mock Get-AzureRmResourceGroup
 
-        .\Set-SbResourceGroupTags -ResourceGroupName "sb-barfoo-rg" -env "prod" -org "sb" -team "app" -CostCenter "10001" -instance "dpp"
+        .\Set-WWWResourceGroupTags -ResourceGroupName "sb-barfoo-rg" -env "prod" -org "sb" -team "app" -CostCenter "10001" -instance "dpp"
 
         Should -Invoke -CommandName Get-AzureRmResourceGroup -Exactly 1 -Scope It
         Should -Invoke -CommandName New-AzureRmResourceGroup -Exactly 1 -Scope It
@@ -61,7 +61,7 @@ Describe "Set-SbResourceGroupTags unit tests" -Tag "Unit" {
             }
         }
     
-        .\Set-SbResourceGroupTags -ResourceGroupName "sb-barfoo-rg" -env "test" -org "sb" -team "app" -CostCenter "10001" -instance "dpp"
+        .\Set-WWWResourceGroupTags -ResourceGroupName "sb-barfoo-rg" -env "test" -org "sb" -team "app" -CostCenter "10001" -instance "dpp"
 
         Should -Invoke -CommandName Get-AzureRmResourceGroup -Exactly 1 -Scope It
         Should -Invoke -CommandName New-AzureRmResourceGroup -Exactly 0 -Scope It
