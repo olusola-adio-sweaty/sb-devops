@@ -23,7 +23,7 @@ steps:
     TargetFileNames: parameters.json
 - task: PowerShell@2
   name: DownloadSetEsfaResourceGroupTagsScript
-  displayName: 'Download Set-EsfaResourceGroupTags script'
+  displayName: 'Download Set-WWWResourceGroupTags script'
   inputs:
     targetType: 'inline'
     script: Invoke-WebRequest -Uri ${{ parameters.SetTagsScriptUrl }} -OutFile ${{ parameters.SetTagsScriptFilePath }}
