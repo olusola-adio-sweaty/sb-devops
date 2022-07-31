@@ -3,7 +3,6 @@
 
 parameters:
   Location: 'West Europe'
-  BicepTemplateRoot: ''
   AzureSubscription: ''
   ResourceGroup: ''
   envTag: ''
@@ -13,17 +12,8 @@ parameters:
   instanceTag: ''
   SetTagsScriptUrl: 'https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/PSScripts/Set-WWWResourceGroupTags.ps1'
   SetTagsScriptFilePath: '$(System.DefaultWorkingDirectory)\Set-WWWResourceGroupTags.ps1'
-  DeployBicepTemplateScriptUrl: https://raw.githubusercontent.com/olusola-adio-sweaty/sb-devops/master/PSScripts/Deploy-BicepTemplates.ps1
-  DeployBicepTemplateScriptFilePath: $(System.DefaultWorkingDirectory)\Test-BicepTemplates.ps1
-  ArmOutputVariableName: 'ARMOutputs'
-  BuildNumber: ''
 
 steps:
-- task: Tokenization@2
-  displayName: 'Tokenization: Transform file parameters.json'
-  inputs:
-    SourcePath: ${{ parameters.BicepTemplateRoot }}
-    TargetFileNames: parameters.json
 - task: PowerShell@2
   displayName: 'Download Set-WWWResourceGroupTags script'
   inputs:
@@ -37,21 +27,3 @@ steps:
     ScriptPath: ${{ parameters.SetTagsScriptFilePath }}
     ScriptArguments: '-ResourceGroupName ${{ parameters.ResourceGroup }}  -Location "${{  parameters.Location  }}" -env "${{ parameters.envTag }}" -org "${{ parameters.orgTag }}" -team "${{ parameters.teamTag }}"  -CostCenter "${{ parameters.CostCenterTag }}" -instance "${{ parameters.instanceTag }}" -Verbose'
     azurePowerShellVersion: LatestVersion
-- task: PowerShell@2
-  displayName: 'Download Deploy-BicepTemplate script'
-  inputs:
-    targetType: 'inline'
-    script: Invoke-WebRequest -Uri ${{ parameters.DeployBicepTemplateScriptUrl }} -OutFile ${{ parameters.DeployBicepTemplateScriptFilePath }}
-- task: AzureCLI@2
-  displayName: 'Deploying Bicep Template'
-  inputs:
-    azureSubscription: ${{ parameters.AzureSubscription }}
-    scriptType: ps
-    scriptPath: ${{ parameters.DeployBicepTemplateScriptFilePath }}
-    arguments: -ResourceGroupName '${{ parameters.ResourceGroup }}' -ParameterFile '${{ parameters.BicepTemplateRoot }}\parameters.json' -TemplateFile '${{ parameters.BicepTemplateRoot }}\template.bicep' -BuildNUmber '${{ parameters.BuildNumber }}' -Verbose
-- task: DeleteFiles@1
-  displayName: 'Delete tokenised parameters.json file'
-  inputs:
-    SourceFolder: ${{ parameters.BicepTemplateRoot }}
-    Contents: parameters.json
-  condition: always()
